@@ -81,7 +81,7 @@ const SearchFilterBoxComponent = () => {
               <option value="">Type a Destination</option>
 
               {countryDatas !== null
-                ? countryDatas.map((countryData, idx) => (
+                ? countryDatas?.map((countryData, idx) => (
                     <option key={idx} value={countryData.country_name}>
                       {countryData.country_name}
                     </option>

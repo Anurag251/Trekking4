@@ -124,17 +124,17 @@ function App() {
               path="/package-details/:id"
               element={<NewPackageDetailsComponent />}
             />
-            <Route path="/search-page" element={<SearchedPackagePage />} />
-
+            
             <Route
-              path="/about-us"
-              element={<ReasonsToChooseUsPage />}
+            path="/about-us"
+            element={<ReasonsToChooseUsPage />}
             />
-
+            
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog-details/:id" element={<BlogDetailsPage />} />
             <Route path="/meet-the-team" element={<MeetTheTeamPage />} />
             {/* <Route path="/details/:id" element={<PackageDetails />} />
+            <Route path="/search-page" element={<SearchedPackagePage />} />
             <Route path="/searchs" element={<SearchPage />} />
 
             <Route path="/about" element={<AboutPage />} />

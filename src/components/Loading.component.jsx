@@ -1,5 +1,5 @@
 import Lottie from "lottie-react";
-import animationData from "../assets/images/lottieflow-cta-01-2-22968E-linear.json";
+import animationData from "/public/lottieflow-loading-04-1-0168b7-easey.json";
 
 const LoadingComponent = () => {
   return (
