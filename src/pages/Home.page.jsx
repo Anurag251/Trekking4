@@ -1,72 +1,98 @@
 import BannerComponent from "../components/Banner.component";
-import AboutComponent from "../components/About.component";
-import PackageComponent from "../components/Package.component";
-import KnowledgeComponent from "../components/Knowledge.component";
 import TestinomialComponent from "../components/Testinomial.component";
-import BlogComponent from "../components/Blog.component";
-import TeamsComponent from "../components/Teams.component";
 import WhyChooseUsComponent from "../components/WhyChooseUs.component";
-import BreconMountainRescueComponent from "../components/BreconMountainRescue.component";
-import HaveChatComponent from "../components/HaveChat.component";
-import WhatOurCustomersSaysComponent from "../components/WhatOurCustomersSays.component";
 import MountainOFKnowledgeComponent from "../components/MountainOFKnowledge.component";
 import AdVentuResComponent from "../components/AdVentuRes.component";
 import SacredCommunityComponent from "../components/SacredCommunity.component";
 import HelpfulYetisComponent from "../components/HelpfulYetis.component";
-import DownloadTripGuideComponent from "../components/DownloadTripGuide.component";
 import AboutSacredComponent from "../components/AboutSacred.component";
 import SearchBoxComponent from "../components/SearchBox.component";
 import VideoBannerComponent from "../components/VideoBanner.component";
+import { useContext } from "react";
+import { AllDataContext } from "../context/AllData.context";
+import InstagramPosts from "../components/InstagramPost.component";
 
 const HomePage = () => {
+  const {
+    bannerDatas,
+    tripDatas,
+    aboutDetails,
+    categoriesDatas,
+    blogDatas,
+    videoDatas,
+    whyChooseUs,
+    reviewDatas,
+    teamDatas,
+    contactDatas,
+  } = useContext(AllDataContext);
+
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="home-page">
-      <BannerComponent />
+      {bannerDatas?.length ? <BannerComponent /> : null}
+      {/* tripDatas?.length ? <SearchBoxComponent /> : null */}
 
-      <SearchBoxComponent />
+      {aboutDetails?.length ? <AboutSacredComponent /> : null}
 
-      <AboutSacredComponent />
+      {tripDatas?.length ? (
+        <AdVentuResComponent
+          title={`${contactDatas?.branding?.adventure_title1}`}
+          subTitle={contactDatas?.branding?.adventure_title2}
+          pageName="feature-birding-trip"
+        />
+      ) : null}
 
-      <AdVentuResComponent
-        title="Best Selling"
-        subTitle="OUR BEST SELLING PACKAGES"
-      />
+      {categoriesDatas?.length ? (
+        <MountainOFKnowledgeComponent
+          title={contactDatas?.branding?.activities_title1}
+          subTitle={contactDatas?.branding?.activities_title2}
+          link="/activities"
+        />
+      ) : null}
 
-      <MountainOFKnowledgeComponent
-        title="DESTINATIONS"
-        subTitle="BEST DESTINATIONS TO TRAVEL IN SOUTH ASIA"
-        link="/destination"
-      />
+      {/* tripDatas?.length ? (
+        <AdVentuResComponent
+          title={contactDatas?.branding?.recommend_title1}
+          subTitle={contactDatas?.branding?.recommend_title2}
+          pageName="mountaineering-expedition"
+          mountain
+        />
+      ) : null */}
 
-      <AdVentuResComponent title="TOURS" subTitle="Luxury Tours in Nepal" />
+      {blogDatas?.length ? (
+        <SacredCommunityComponent
+          title={contactDatas?.branding?.blogs1}
+          subTitle={contactDatas?.branding?.blogs2}
+        />
+      ) : null}
 
-      <MountainOFKnowledgeComponent
-        title="EXPEDITION"
-        subTitle="Yala Peak Climbing | Peak Climbing In Nepal |"
-        link="/expedition"
-      />
+      {videoDatas !== null && videoDatas !== undefined ? (
+        <VideoBannerComponent />
+      ) : null}
 
-      <SacredCommunityComponent />
+      {whyChooseUs?.length ? (
+        <WhyChooseUsComponent
+          title={contactDatas?.branding?.whyCamp2summit1}
+          subTitle={contactDatas?.branding?.whyCamp2summit2}
+        />
+      ) : null}
 
-      <VideoBannerComponent />
+      {reviewDatas?.length ? (
+        <TestinomialComponent
+          title={contactDatas?.branding?.review_title1}
+          subTitle={contactDatas?.branding?.review_title2}
+        />
+      ) : null}
 
-      <WhyChooseUsComponent />
+      {teamDatas?.length ? (
+        <HelpfulYetisComponent
+          title={contactDatas?.branding?.team1}
+          subTitle={contactDatas?.branding?.team2}
+        />
+      ) : null}
 
-      <TestinomialComponent />
-
-      <HelpfulYetisComponent />
-
-      {/* <AboutComponent />
-
-      <PackageComponent />
-
-      <KnowledgeComponent />
-
-      <TestinomialComponent />
-
-      <BlogComponent />
-
-      <TeamsComponent /> */}
+      <InstagramPosts />
     </div>
   );
 };

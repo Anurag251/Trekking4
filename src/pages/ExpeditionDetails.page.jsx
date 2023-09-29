@@ -14,7 +14,7 @@ const ExpeditionDetailsPage = () => {
 
   useEffect(() => {
     categoriesDatas?.forEach((data) => {
-      if (data.id === parseInt(location.pathname.split("/")[2])) {
+      if (data.slug === location.pathname.split("/")[2]) {
         setSelectedData(data);
       }
     });

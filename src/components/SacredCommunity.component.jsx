@@ -1,20 +1,20 @@
+/* eslint-disable react/prop-types */
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AllDataContext } from "../context/AllData.context";
 import BlogCardComponent from "./BlogCard.component";
 
-const SacredCommunityComponent = () => {
+const SacredCommunityComponent = ({ title, subTitle }) => {
   const { blogDatas } = useContext(AllDataContext);
 
   return (
     <div className="blog_page">
+      <div className="title-part" data-aos="fade-down">
+        <div className="name">{title}</div>
+        <h5>{subTitle}</h5>
+      </div>
       <section>
         <div className="wrapper">
-          <div className="title-part">
-            <div className="name">From Our Blog</div>
-            <h5>Our Latest News and Promotions</h5>
-          </div>
-
           <div className="list">
             {blogDatas &&
               blogDatas

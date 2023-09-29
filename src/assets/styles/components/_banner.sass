@@ -126,6 +126,33 @@
   .mySwiper
     overflow: hidden
 
+    .swiper-button-next, .swiper-button-prev
+      top: 90%
+      height: 2.5rem
+      width: 2.5rem
+      border-radius: 50%
+      border: 2px dashed $light
+      @include trans()
+
+      &:hover
+        transform: scale(1.02)
+        border-style: solid
+
+        &::after
+          transform: translateX(0)
+
+      &::after
+        content: '→'
+        transform: translateX(-15px)
+        color: $light
+        @include trans()
+        font-size: 2rem
+
+    .swiper-button-prev
+      &::after
+        content: '←'
+        transform: translateX(15px)
+
   .swiper-slide
     &.swiper-slide-active
       .item
@@ -146,13 +173,16 @@
 
     .item
       @include bgImage()
-      height: 45rem
+      height: 36rem
       position: relative
 
       .slider-image
         position: absolute
         height: 100%
         width: 100%
+        &::after
+          content: ""
+          @include dark($opacity: .2)
 
         img
           @include image()
@@ -172,10 +202,12 @@
         z-index: 10
         text-align: center
         width: 100%
+        padding-bottom: 2rem
 
         h2
-          text-align: center
-          font-size: 3.7rem
+          text-align: left
+          font-size: 3rem
+          line-height: 3.5rem
           color: $light
           text-shadow: 0 0 10px rgba($dark, .8)
           font-weight: 600
@@ -189,8 +221,9 @@
           transition-delay: 1s
 
         p
+          text-shadow: 0 0 10px rgba($dark, .9)
           font-size: 18px
-          line-height: 2rem
+          line-height: 1.6rem
           opacity: 0
           transition: .8s
           transition-delay: 2s

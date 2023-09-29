@@ -5,6 +5,8 @@ import NewPackageCardComponent from "../components/NewPackageCard.component";
 const AllPackagePage = () => {
   const { tripDatas } = useContext(AllDataContext);
 
+  console.log(tripDatas)
+
   return (
     <section className="sec-bg">
       <div className="wrapper">

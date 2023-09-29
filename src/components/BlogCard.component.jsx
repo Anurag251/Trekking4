@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 
 import { Link } from "react-router-dom";
+import HtmlToParagraphs from "./HtmlToParagraphs.component";
 
 const BlogCardComponent = ({ data }) => {
   return (
-    <Link to={`/blog-details/${data.id}`}>
-      <div className="BlogCardComponent">
+    <Link to={`/blog-details/${data.slug}`}>
+      <div className="BlogCardComponent" data-aos="fade-down">
         <div className="image-area">
           <img src={data.image.original_image} alt="" />
 
@@ -18,12 +19,7 @@ const BlogCardComponent = ({ data }) => {
         <div className="content">
           <div className="name">{data.title}</div>
 
-          <p className="desc">
-            These beautiful dunes of the sand are believed to have originated
-            from a flood caused back in the 1920's, known among locals as the
-            Khumdan Floods. These dunes keep on shifting at the whim of the
-            staggering wind storms that rise almost every evenings.{" "}
-          </p>
+          <HtmlToParagraphs data={data?.content} length={300} />
 
           <button>
             Read More <i className="fas fa-arrow-right"></i>

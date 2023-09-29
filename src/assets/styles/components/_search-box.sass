@@ -98,6 +98,7 @@
 .package-search-area
   border-bottom: 1px solid rgba($dark, .3)
   padding: 3rem 0
+  position: relative
 
   .title-part
     margin-bottom: 2rem
@@ -109,10 +110,9 @@
 
   .form
     width: 100%
+    padding: 0 1.5rem
 
   .package-search
-    @include grid($columns: (1.5fr 1fr 1fr .35fr))
-    grid-gap: 10px
     max-width: 1000px
     margin: 0 auto
     width: 100%
@@ -163,6 +163,37 @@
         border-radius: 50%
         animation: loadingBtn .8s infinite cubic-bezier(0.77, 0, 0.175, 1)
         display: none
+
+  .suggest-list
+    position: absolute
+    top: 7rem
+    left: 5rem
+    width: 100%
+    z-index: 10
+    background-color: $light
+    padding: .6rem
+    border-radius: .4rem
+    box-shadow: 0 0 6px rgba($dark, .1)
+    max-width: 40rem
+    height: 20rem
+    overflow: auto
+
+    ul
+      li
+        margin-bottom: .2rem
+        &:nth-last-child(1)
+          margin-bottom: 0
+
+        button
+          padding: .6rem 1rem
+          border-radius: .3rem
+          font-size: .9rem
+          cursor: pointer
+          width: 100%
+          text-align: left
+
+          &:hover
+            background-color: rgba($dark, .06)
 
 @keyframes loadingBtn
   0%

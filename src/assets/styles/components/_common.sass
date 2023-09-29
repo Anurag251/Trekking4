@@ -4,26 +4,36 @@
 
 .title-part
   text-align: center
-  margin-bottom: 2.5rem
+  background-color: $bgColor
+  width: 100%
+  margin: auto
+  color: $light
+  padding: 2rem 1rem
+  margin-bottom: 0
+
+  &.no-bg
+    background: none
+
+    .name
+      color: $dark
 
   h5
     font-size: .9rem
-    font-weight: 400
-    text-transform: uppercase
-    letter-spacing: 2px
+    font-weight: 600
+    color: $pri
+    max-width: 1200px
+    margin: auto
 
   .name
-    font-weight: 300
+    font-weight: 700
     font-size: 2rem
-    text-transform: uppercase
+    margin: auto
     margin-bottom: .3rem
+    max-width: 1200px
 
     // font-family: 'Old Growth', sans-serif
 
 .why-choose-us
-  .title-part
-    color: $dark
-
   .list
     @include grid($columns: 1fr 1fr 1fr 1fr)
     grid-gap: 2rem
@@ -128,10 +138,6 @@
           cursor: pointer
 
 .blog_page
-
-  .title-part
-    color: $dark
-
   .list
     @include grid($columns: 1fr 1fr 1fr)
     margin-top: 2rem
@@ -216,12 +222,19 @@
         color: $light
         background-color: rgba($darkBg, .8)
         text-align: center
+        @include flex($justify: center)
+
         z-index: 2
 
         .name
           font-size: 1.2rem
           font-weight: 500
           text-transform: capitalize
+          max-width: 90%
+          text-align: center
+          overflow: hidden
+          text-overflow: ellipsis
+          white-space: nowrap
 
         .desc
           font-size: .9rem
@@ -259,18 +272,30 @@
   position: relative
 
   .list
-    @include grid($columns: 1fr 1fr 1fr 1fr 1fr)
+    @include grid($columns: 1fr 1fr 1fr 1fr)
     align-items: flex-start
 
     .item
-      padding: .5rem
       background-color: rgba($light, .1)
-      border-radius: .4rem
+      background-color: $light
+      cursor: pointer
+
+      &:hover
+        .content
+          .name, .phone
+            color: $light
+
+          .social-media
+            li
+              a
+                color: $light
+
+          &::before
+            height: 100%
 
       .image-area
-        height: 15rem
+        height: 17rem
         width: 100%
-        border-radius: .4rem
         overflow: hidden
         box-shadow: 0 0 10px rgba($dark, .2)
 
@@ -278,17 +303,57 @@
           @include image()
 
       .content
-        margin-top: .7rem
+        padding: 1rem
+        position: relative
+
+        &::before
+          content: ""
+          @include dark($opacity: 1)
+          height: 0
+          @include trans()
+          z-index: 1
 
       .name
-        font-size: 1.1rem
+        font-size: 1rem
         font-weight: 600
         color: $dark
+        position: relative
+        z-index: 2
+        @include trans()
+        max-width: 90%
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
+
+      .social-media
+        margin-top: .5rem
+        @include flex($justify: flex-start)
+        gap: 1rem
+        padding-left: 0
+        position: relative
+        z-index: 2
+
+        li
+          a
+            color: $dark
+            @include trans()
+
+      ul
+        padding-left: 1rem
 
       .phone
-        font-size: .85rem
-        color: $pri
+        font-size: .7rem
+        color: $dark
         margin: .3rem 0
+        list-style: disc
+        position: relative
+        z-index: 2
+        @include trans()
+
+      .desc
+        text-align: justify
+        font-size: .9rem
+        line-height: 1.4rem
 
       .social-icon
         @include flex($justify: flex-start)
@@ -370,15 +435,18 @@
   .item
     @include flex($justify: stretch)
     gap: 2rem
+    margin-top: 3rem
 
     .content
       flex: 50%
 
     .images-area
-      height: 23rem
+      flex: 50%
+      height: 22rem
 
       img
         @include image()
+        border-radius: 1rem
 
     .mySwiper
       flex: 50%
@@ -396,16 +464,26 @@
           @include image()
 
     .content
+      h1
+        margin-bottom: .5rem
+        font-size: 1.6rem
+        font-weight: 500
+
       p
         line-height: 1.7rem
         font-size: 17px
         color: rgba($dark, .7)
+        text-align: justify
 
       h6
         font-size: 16px
         line-height: 1.7rem
         font-weight: 300
         margin-bottom: 1rem
+
+      button
+        @include customButton($bgcolor: $pri, $color: $light)
+        margin-top: 1rem
 
   .button-group
     gap: 1rem
@@ -426,7 +504,7 @@
   &::after
     content: ''
     @include dark($opacity: .1)
-    background-color: rgba($light, .3)
+    background-color: rgba($dark, .3)
     z-index: 1
 
   .wrapper
@@ -434,16 +512,29 @@
     z-index: 2
     width: 100%
 
+  .breadcrumbs
+    text-align: left
+    @include flex($justify: flex-start)
+    flex-wrap: wrap
+    color: $light
+
+    &.contentLeft
+      justify-content: flex-start
+      text-align: left
+
+    a
+      color: $light
+
   h4
     font-size: 20px
     text-transform: uppercase
     color: $light
     text-shadow: 0 0 10px rgba($dark, .8)
     letter-spacing: 2px
-    margin-bottom: .5rem
+    margin-bottom: .2rem
 
   h1
-    text-align: center
+    text-align: left
     font-size: 3.5rem
     color: $light
     text-shadow: 0 0 10px rgba($dark, .8)
@@ -455,20 +546,46 @@
       text-align: left
 
 .ReasonsToChooseUs
+  section
+    padding: 2rem 0
+
   .about-content
     h3
-      font-size: 2rem
-      margin-bottom: 1.5rem
+      font-size: 1.5rem
+      margin-bottom: 1rem
       font-weight: 500
 
+    p
+      margin-bottom: 1.5rem
+      font-size: 16px
+      font-weight: 400
+      line-height: 1.7rem
+      text-align: justify
+
+    table
+      width: 100% !important
+      background: none !important
+
+      td
+        padding: .2rem
+        background: none !important
+
+      p
+        margin-bottom: 0
+
     ul
+      padding-left: 1.5rem
+
       li
-        margin-bottom: 1.5rem
-        font-size: 16px
-        font-weight: 300
+        list-style: disc
+        list-style-type: circle
 
   .with-image
     @include grid($columns: 1fr 1fr)
+
+    &.fullView
+      grid-template-columns: 1fr
+      padding: 0
 
     &:nth-child(even)
       .about-content
@@ -575,87 +692,85 @@
         text-align: center
 
 .NewPackageDetails
-  .PackageMainDetails
-    background-color: darken($pri, 25%)
-    padding: 1rem 0
+  background-color: $light
 
+  .PackageMainDetails
     .item-list
-      @include flex($justify: center)
-      color: $light
+      @include flex($justify: flex-start)
       flex-wrap: wrap
-      column-gap: 5rem
-      row-gap: 1rem
+      gap: 1rem
+      color: $dark
+      padding-left: 0 !important
+      padding: 1rem 0
+      border: 1px solid rgba($dark, .3)
+      border-left: 0
+      border-right: 0
 
       li
         @include flex($justify: flex-start)
-        gap: 1rem
-        font-size: 1.3rem
-        font-weight: 300
+        gap: .4rem
+        font-size: .8rem
+        font-weight: 400
+        color: $dark
 
-        &.price
-          font-size: 1.6rem
-          font-weight: 600
-          color: #2ae17f
+        .icon
+          height: 1.2rem
+          width: 1.2rem
 
-        img
-          height: 1.8rem
-          width: 1.8rem
-          object-fit: contain
-
-        i
-          font-size: 1.5rem
+          svg
+            height: 100%
+            width: 100%
 
 .NavigateButtons
   background-color: lighten($dark, 88%)
-  box-shadow: 0 4px 10px rgba($darkBg, .3)
+  box-shadow: 0 4px 10px rgba($darkBg, .1)
   position: sticky
-  top: 3.2rem
+  top: 0
   z-index: 10
+  background-color: $light
 
-  .top-area
-    padding: 1rem 0
+  .wrapper
+    @include flex($justify: space-between)
+    height: 100%
+
+  .last-button
     @include flex($justify: center)
     flex-wrap: wrap
-    column-gap: 2rem
+    column-gap: 1rem
     row-gap: 1rem
+    height: 100%
 
     .bookNowNutton
-      @include customButton($bgcolor: $sec, $color: $light)
-      width: 200px
-      height: 45px
-      font-size: 18px
+      @include customButton($bgcolor: $pri, $color: $light)
+      font-size: 1rem
       text-transform: uppercase
+      height: 100%
 
     .galleryButton
-      @include customButton($bgcolor: $light, $color: $darkBg)
-      width: 200px
-      height: 45px
-      font-size: 18px
+      @include customButton($bgcolor: $sec, $color: $light)
+      font-size: 1rem
       text-transform: uppercase
-      background-color: $darkBg
-      border: 1px solid $dark
+      height: 100%
 
   .button-list
     @include flex($justify: stretch)
     grid-gap: 5px
 
     .navigateBtn
-      width: 100%
       height: 3rem
       background-color: $light
       color: $darkBg
-      text-transform: uppercase
       font-weight: 500
-      font-size: 1.14rem
+      font-size: 1rem
       cursor: pointer
-      box-shadow: 0 2px .5rem rgba($dark, .2)
+      padding: 0 1rem
 
       &.active
         background-color: $dark
         color: $light
 
 .TripOverview
-  background-color: #F2F2F2
+  background-color: $light
   opacity: 0
   height: 0
   overflow: hidden
@@ -669,8 +784,8 @@
     height: 100%
 
   .main-title
-    font-size: 2.2rem
-    text-align: center
+    font-size: 1.6rem
+    text-align: left
     font-weight: 600
     text-transform: capitalize
 
@@ -678,10 +793,7 @@
       display: none
 
   .main-container
-    margin-top: 2rem
-    padding: 2rem
-    border: 1px solid rgba($dark, .6)
-    background-color: $light
+    margin-top: 1rem
 
     section
       &:nth-last-child(1)
@@ -717,41 +829,15 @@
             line-height: 1.5rem
 
     .TripOverviewMainContent
-
-      // h6
-      //   font-size: 1.1rem
-      //   font-weight: 400
-      //   line-height: 1.8rem
-      //   margin-bottom: 1.5rem
-      //   color: rgba($dark, .7)
-      //   margin-top: 1rem
-
-      // p
-      //   p
-      //     font-size: .98rem
-      //     line-height: 1.5rem
-      //     font-weight: 300
-      //     color: rgba($dark, .8)
-      //     margin-bottom: 1rem
-
-      // a
-      //   color: $pri
-      //   text-transform: uppercase
-      //   text-decoration: underline
-
-      // h5
-      //   font-size: 1.1rem
-      //   margin-top: 2rem
-      //   margin-bottom: 1rem
-      //   font-weight: 400
+      p
+        text-align: justify
+        margin-bottom: 1rem
 
       ul
         padding-left: 1rem
 
         li
           list-style: disc
-      //     margin-bottom: .6rem
-      //     color: rgba($dark, .8)
 
     .included-and-not-included
       @include grid($columns: 1fr 1fr)
@@ -778,7 +864,7 @@
               font-size: 1.3rem
 
 .ItinerarySection
-  background-color: #F2F2F2
+  background-color: $light
   opacity: 0
   height: 0
   overflow: hidden
@@ -792,8 +878,8 @@
     height: 100%
 
   .main-title
-    font-size: 2.2rem
-    text-align: center
+    font-size: 1.6rem
+    text-align: left
     font-weight: 600
     text-transform: capitalize
 
@@ -801,10 +887,7 @@
       display: none
 
   .main-container
-    margin-top: 2rem
-    padding: 2rem
-    border: 1px solid rgba($dark, .6)
-    background-color: $light
+    margin-top: 1rem
 
     .all-list
       padding-left: 2rem
@@ -814,10 +897,9 @@
         content: ''
         position: absolute
         top: .2rem
-        left: 0
+        left: .3rem
         height: 100%
-        width: 1px
-        background-color: rgba($dark, .3)
+        border-left: 1px dashed rgba($dark, .6)
 
       .ItineraryCardComponent
         border-bottom: 1px solid rgba($dark, .3)
@@ -861,17 +943,19 @@
             i
               font-size: 1.6rem
 
-          &::before
+          .indicator
             content: ''
             position: absolute
             top: 50%
             left: -2.7rem
             transform: translateY(-50%)
-            height: 1.3rem
-            width: 1.3rem
+            height: 2rem
+            width: 2rem
             border-radius: 50%
-            background-color: $light
-            border: 1px solid rgba($dark, .3)
+            background-color: $pri
+            color: $light
+            @include flex($justify: center)
+            font-size: .8rem
 
         .item-body
           margin-top: 0
@@ -884,15 +968,16 @@
           p
             overflow: hidden
             font-size: 1rem
-            font-weight: 300
-            color: rgba($dark, .8)
+            font-weight: 400
+            color: rgba($dark, .9)
             line-height: 1.5rem
+            text-align: justify
 
             &:nth-last-child(1)
               margin-bottom: 0
 
 .DateAndPriceSection
-  background-color: #F2F2F2
+  background-color: $light
   opacity: 0
   height: 0
   overflow: hidden
@@ -906,8 +991,8 @@
     height: 100%
 
   .main-title
-    font-size: 2.2rem
-    text-align: center
+    font-size: 1.6rem
+    text-align: left
     font-weight: 600
     text-transform: capitalize
 
@@ -915,10 +1000,7 @@
       display: none
 
   .main-container
-    margin-top: 2rem
-    padding: 2rem
-    border: 1px solid rgba($dark, .6)
-    background-color: $light
+    margin-top: 1rem
 
     h3
       font-size: 1.6rem
@@ -1307,12 +1389,44 @@
           width: 100%
 
 .MoreInfoSection
-  background-color: #F2F2F2
+  background-color: $light
   opacity: 0
   height: 0
   overflow: hidden
   transition: .2s
   pointer-events: none
+
+  &.includeExcludes
+    .TripOverviewMainContent
+      @include grid($columns: 1fr 1fr)
+
+      .IncludesArea
+        ul
+          li
+            list-style: none
+
+            &::before
+              content: "✓"
+              color: $pri
+              font-weight: bold
+              display: inline-block
+              width: 1em
+              margin-left: -1em
+              margin-right: .3rem
+
+      .ExcludeArea
+        ul
+          li
+            list-style: none
+
+            &::before
+              content: "✘"
+              color: red
+              font-weight: bold
+              display: inline-block
+              width: 1em
+              margin-left: -1em
+              margin-right: .3rem
 
   &.active
     overflow: visible
@@ -1321,8 +1435,8 @@
     height: 100%
 
   .main-title
-    font-size: 2.2rem
-    text-align: center
+    font-size: 1.6rem
+    text-align: left
     font-weight: 600
     text-transform: capitalize
 
@@ -1330,10 +1444,21 @@
       display: none
 
   .main-container
-    margin-top: 2rem
-    padding: 2rem
-    border: 1px solid rgba($dark, .6)
-    background-color: $light
+    margin-top: 1rem
+
+    h2
+      font-size: 1.4rem
+      font-weight: 600
+      margin-bottom: .6rem
+      margin-top: 1.5rem
+
+    ul
+      padding-left: 1.5rem
+
+      li
+        margin-bottom: .5rem
+        list-style: disc
+        list-style-type: circle
 
     .more-info-list
       position: relative
@@ -1393,6 +1518,8 @@
               margin-bottom: 0
 
 .GallerySection
+  background-color: #F2F2F2
+
   .gallery-area
     margin-top: 2rem
 
@@ -1752,6 +1879,7 @@
           text-align: center
           font-size: 1rem
           margin-bottom: 1rem
+          text-align: justify
 
         .desc
           text-align: justify
@@ -1959,6 +2087,117 @@
         color: rgba($dark, .8)
         line-height: 1.5rem
         font-weight: 300
+
+.teams-popup
+  position: fixed
+  top: 0
+  left: 0
+  height: 100%
+  width: 100%
+  padding: 1rem
+  z-index: 100
+  @include flex($justify: center)
+  pointer-events: none
+  overflow: auto
+
+  &.active
+    pointer-events: auto
+
+    .popup-bg
+      opacity: 1
+
+    .popup-box
+      opacity: 1
+      transform: scale(1)
+
+  .popup-bg
+    position: fixed
+    left: 0
+    top: 0
+    bottom: 0
+    right: 0
+    background-color: rgba($dark, .6)
+    backdrop-filter: blur(10px)
+    opacity: 0
+    z-index: 1
+    transition: .4s
+
+  .popup-box
+    max-width: 50rem
+    width: 100%
+    background-color: $light
+    box-shadow: 0 0 10px rgba($dark, .1)
+    padding: 1rem
+    border-radius: 1rem
+    position: relative
+    z-index: 2
+    transform: scale(1.1)
+    opacity: 0
+    transition: .4s
+
+    .popup-close
+      position: absolute
+      right: 0
+      top: -2.5rem
+      height: 2rem
+      width: 2rem
+      border-radius: 50%
+      background-color: rgba($light, .8)
+      @include flex($justify: center)
+      color: #a00000
+      cursor: pointer
+
+      &:hover
+        background-color: rgba($light, 1)
+
+      i
+        font-size: 1.2rem
+
+    .popup-container
+      @include flex($justify: stretch)
+      align-items: flex-start
+      gap: 1rem
+      width: 100%
+
+      .team-image
+        max-width: 15rem
+        height: 20rem
+        width: 100%
+
+        img
+          @include image()
+          border-radius: 1rem
+
+      .details
+        max-width: calc( 100% - 15rem )
+
+        .social-media
+          margin-top: .5rem
+          @include flex($justify: flex-start)
+          gap: 1rem
+          padding-left: 0
+          position: relative
+          z-index: 2
+
+          li
+            a
+              color: $dark
+              @include trans()
+
+        .name
+          font-size: 1.2rem
+          font-weight: 600
+          margin-bottom: .3rem
+
+        .designation
+          font-size: .9rem
+          color: rgba($dark, .7)
+          margin-bottom: 1rem
+
+        .desc
+          font-size: .9rem
+          line-height: 1.5rem
+          text-align: justify
 
 .MeetTheTeamPage
   .teams-area
@@ -2781,7 +3020,8 @@
   align-items: flex-start
   z-index: 100
   pointer-events: none
-  padding: 4rem 0
+  padding: 4rem 1rem
+  overflow: auto
 
   &.active
     pointer-events: auto
@@ -2845,6 +3085,104 @@
         object-fit: contain
 
 .VideoBanner
+  .video-popup
+    position: fixed
+    top: 0
+    left: 0
+    height: 100%
+    width: 100%
+    padding: 1rem
+    z-index: 100
+    @include flex($justify: center)
+    pointer-events: none
+
+    &.active
+      pointer-events: auto
+
+      .popup-bg
+        opacity: 1
+
+      .popup-box
+        opacity: 1
+        transform: scale(1)
+
+    .popup-bg
+      position: absolute
+      left: 0
+      top: 0
+      bottom: 0
+      right: 0
+      background-color: rgba($dark, .6)
+      backdrop-filter: blur(10px)
+      opacity: 0
+      z-index: 1
+      transition: .4s
+
+    .popup-box
+      max-width: 50rem
+      width: 100%
+      height: 30rem
+      background-color: $light
+      box-shadow: 0 0 10px rgba($dark, .1)
+      padding: 1rem
+      border-radius: 1rem
+      position: relative
+      z-index: 2
+      transform: scale(1.1)
+      opacity: 0
+      transition: .4s
+
+      .popup-close
+        position: absolute
+        right: 0
+        top: -2.5rem
+        height: 2rem
+        width: 2rem
+        border-radius: 50%
+        background-color: rgba($light, .8)
+        @include flex($justify: center)
+        color: #a00000
+        cursor: pointer
+
+        &:hover
+          background-color: rgba($light, 1)
+
+        i
+          font-size: 1.2rem
+
+      .popup-container
+        height: 100%
+        @include flex($justify: stretch)
+        align-items: flex-start
+        gap: 1rem
+
+        @keyframes videoLoader
+          0%
+            transform: translate(-50%, -50%) rotate(0)
+
+          100%
+            transform: translate(-50%, -50%) rotate(360deg)
+
+        .loader
+          height: 3rem
+          width: 3rem
+          border-radius: 50%
+          position: absolute
+          left: 50%
+          top: 50%
+          transform: translate(-50%, -50%)
+          border: 4px solid $pri
+          border-left-color: $light
+          border-right-color: $light
+          animation: videoLoader 1s infinite
+          z-index: 1
+
+        iframe
+          position: relative
+          z-index: 2
+          height: 100%
+          width: 100%
+
   .video-image-area
     position: relative
 
@@ -2864,11 +3202,11 @@
       position: absolute
       top: 50%
       transform: translateY(-50%)
-      left: 2rem
       max-width: 40rem
       z-index: 2
       color: $light
       line-height: 3.5rem
+      padding: 2rem
 
       .video-title
         font-size: 3rem
@@ -2876,6 +3214,7 @@
       .button-group
         margin-top: 1rem
         @include flex($justify: flex-start)
+        flex-wrap: wrap
         gap: 2rem
 
         .explore
@@ -2926,6 +3265,10 @@
   section
     padding-top: 0
 
+  .title-part
+    .name
+      color: $light
+
   .title
     color: $dark
     margin-bottom: 1rem
@@ -2934,7 +3277,6 @@
     text-align: left
 
   .list
-
     .mySwiper
       .swiper-slide
         width: auto
@@ -3035,6 +3377,404 @@
       border-radius: 50%
       animation: loadingBtn .8s infinite cubic-bezier(0.77, 0, 0.175, 1)
       display: none
+
+.recommended-trekking-gears
+  .gear-list
+    @include grid($columns: 1fr 1fr)
+
+    .item
+      @include flex($justify: stretch)
+      align-items: flex-start
+      gap: 1rem
+      width: 100%
+      padding: 1rem
+      box-shadow: 0 0 10px rgba($dark, .1)
+      border-radius: 1rem
+
+      .team-image
+        max-width: 15rem
+        min-height: 17rem
+        max-height: 20rem
+        height: 100%
+        width: 100%
+
+        img
+          @include image()
+          border-radius: 1rem
+          object-fit: contain
+
+      .details
+        max-width: calc( 100% - 15rem )
+
+        .name
+          font-size: 1.2rem
+          font-weight: 600
+          margin-bottom: .3rem
+
+        .designation
+          font-size: .9rem
+          color: rgba($dark, .7)
+          margin-bottom: 1rem
+
+        ul
+          padding-left: 1.1rem
+
+          li
+            font-size: .9rem
+            line-height: 1.5rem
+            list-style: decimal
+
+.custom-tours
+  .title-part
+    padding: 0
+
+    .name
+      margin-bottom: .5rem
+      font-size: 1.6rem
+
+  .custom-tours-form-area
+    padding: 2rem
+    background-color: $light
+    border-radius: .4rem
+    box-shadow: 0 0 10px rgba($dark, .1)
+    max-width: 50rem
+    margin: 0 auto
+
+  .form-subtitle
+    font-size: 1.1rem
+    margin-bottom: 1.3rem
+
+  .form-inputs
+    .form-title
+      margin-bottom: 1rem
+      font-size: 1.2rem
+      font-weight: 500
+
+      .required
+        color: #fc0000
+
+    .input-group
+      margin-bottom: 2rem
+
+      &:nth-last-child(1)
+        margin-bottom: 0
+
+    // .group
+    //   position: relative
+    //   height: 2.6rem
+    //   width: 100%
+    //   margin: 0 0 2rem
+
+    //   &.phone-input
+    //     @include grid($columns: .3fr 1fr)
+
+    //     input
+    //       height: 2.5rem
+
+    //   &.textarea
+    //     height: 7rem
+
+    //     textarea
+    //       padding: .7rem
+    //       height: 100%
+    //       resize: none
+
+    //   label
+    //     font-size: 13px
+
+    //   input, textarea, select
+    //     height: 100%
+    //     width: 100%
+    //     padding: .1rem .5rem
+    //     font-size: 14px
+    //     border: 1px solid $light
+    //     background-color: rgba( $light, .9)
+
+  .phone-number-box
+    @include flex($justify: stretch)
+    gap: 1rem
+
+    .group
+      margin-bottom: 0
+      max-width: calc( 100% - 8rem )
+      width: 100%
+
+      &:nth-child(1)
+        max-width: 8rem
+        width: 100%
+
+  .hotelCategory-label
+    margin-bottom: 1rem
+
+  .hotelCategory
+    margin-bottom: 2rem
+
+    ul
+      @include flex($justify: flex-start)
+      flex-wrap: wrap
+      gap: 1rem
+
+      li
+        .button
+          @include flex($justify: flex-start)
+          gap: .6rem
+          padding: .4rem .6rem
+          background-color: rgba($dark, .05)
+          border-radius: .2rem
+          cursor: pointer
+
+          &:hover
+            background-color: rgba($dark, .1)
+
+          &.active
+            background-color: $pri
+
+            .box
+              i
+                display: block
+
+          .box
+            height: 1rem
+            width: 1rem
+            background-color: $light
+            position: relative
+            border-radius: .2rem
+
+            i
+              position: absolute
+              top: 50%
+              left: 70%
+              transform: translate(-50%, -50%)
+              display: none
+              font-size: 1.4rem
+
+  .group
+    height: 3rem
+    position: relative
+    margin-bottom: 1.5rem
+
+    .input-icon
+      position: absolute
+      right: 1rem
+      top: 50%
+      transform: translateY(-50%)
+      height: 1.1rem
+      width: 1.1rem
+
+      &.eye-icon
+        cursor: pointer
+
+        &.active
+          &::after
+            height: 0
+
+        &::after
+          content: ''
+          position: absolute
+          left: 50%
+          top: 50%
+          transform: translate(-50%, -50%) rotate(45deg)
+          height: 105%
+          width: 1.5px
+          background-color: $text
+          border-right: 2px solid $light
+          z-index: 2
+          @include trans()
+
+      svg
+        height: 100%
+        width: 100%
+
+    &.fileType
+      border: 1.5px solid #ACACAC
+      border-radius: .4rem
+      padding: .3rem 1rem
+
+    &.active
+      border-color: $sec
+
+      .custom-input
+        padding: 0 !important
+        border: none !important
+        padding-top: .5rem !important
+
+    &.textarea
+      min-height: 6rem
+      height: auto
+
+      .custom-input
+        min-height: 8rem
+        height: 100%
+        max-height: 15rem
+
+      label
+        top: 1.3rem
+
+      textarea
+        resize: vertical
+        min-height: 3.3rem
+
+    &.error
+      border-color: #A00000
+      margin-bottom: 2rem
+
+      label
+        color: #A00000
+
+    .input-error
+      position: absolute
+      bottom: -1.2rem
+      left: .4rem
+      text-align: left
+      font-size: 12px
+      font-weight: 500
+      color: #A00000
+
+    label
+      position: absolute
+      top: 50%
+      left: .5rem
+      padding: 0 .5rem
+      transform: translateY(-50%)
+      @include fastTrans()
+      pointer-events: none
+      color: lighten($text, 35%)
+      text-transform: uppercase
+      font-size: .9rem
+      letter-spacing: 1px
+
+      &::after
+        content: ''
+        position: absolute
+        top: 50%
+        left: 0
+        transform: translateY(-50%)
+        height: 4px
+        width: 100%
+        background-color: $light
+        z-index: -1
+
+      &.active, &.autoActive
+        @include shrinkLabel()
+        color: $sec
+
+    .inner-input
+      width: 100%
+      height: 100%
+
+    .custom-input
+      width: 100%
+      height: 100%
+      font-size: 1rem
+      border: 1px solid #ACACAC
+      border-radius: .3rem
+      padding: .5rem 1rem
+      text-align: left
+
+      &::placeholder
+        color: transparent
+
+      &:focus
+        border-color: $sec
+
+        &::placeholder
+          color: rgba($dark, .6)
+
+      &:focus ~ label
+        @include shrinkLabel()
+        color: $sec
+
+      &.active
+        border-color: $sec
+
+    .custom-input[type='file']
+      opacity: 0
+      padding-top: .2rem
+      border: 1px solid #ACACAC
+      border-radius: .4rem
+      padding: .5rem 1rem
+
+      &.active[type='file']
+        opacity: 1
+
+  .submit-btn
+    width: 100%
+    font-weight: 600
+    margin-top: 1rem
+    @include customButton($bgcolor: $sec, $color: $light)
+
+    font-size: 16px
+    @include flex($justify: center)
+    gap: 10px
+    text-align: center
+
+    img
+      height: 20px
+      width: 20px
+      margin-left: 5px
+      @include trans()
+
+    &:hover
+      img
+        transform: translateX(4px)
+
+.instagram-post
+  .instagram-post-list
+    @include grid($columns: 1fr 1fr 1fr)
+    grid-gap: 0
+
+    .insta-item
+      height: 20rem
+      width: 100%
+      position: relative
+
+      &:hover
+        &::after
+          opacity: 1
+
+        .content
+          opacity: 1
+          top: 50%
+
+      &::after
+        content: ''
+        @include dark($opacity: .7)
+        opacity: 0
+        @include trans()
+        z-index: 1
+
+      .media-box
+        @include image()
+
+      .content
+        position: absolute
+        top: 40%
+        left: 50%
+        transform: translate(-50%, -50%)
+        width: 100%
+        padding: 1rem
+        text-align: center
+        opacity: 0
+        @include trans()
+        z-index: 2
+
+        p
+          color: $light
+
+        button
+          color: $light
+          cursor: pointer
+          @include flex($justify: center)
+          gap: .3rem
+          width: 100%
+          margin-top: 1rem
+
+          i
+            transition: .4s
+
+          &:hover
+            i
+              transform: translateX(2px)
 
 @keyframes loadingBtn
   0%

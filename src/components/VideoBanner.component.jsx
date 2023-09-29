@@ -1,26 +1,61 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+import { useContext, useState } from "react";
+import { AllDataContext } from "../context/AllData.context";
+import { Link } from "react-router-dom";
+
+const VideoPopup = ({ modalIsOpen, setModalIsOpen, link }) => {
+  return (
+    <div className={`video-popup ${modalIsOpen ? "active" : ""}`}>
+      <div className="popup-bg" onClick={() => setModalIsOpen(false)}></div>
+      <div className="popup-box">
+        <div className="popup-close" onClick={() => setModalIsOpen(false)}>
+          <i className="fas fa-times"></i>
+        </div>
+
+        <div className="popup-container">
+          <div className="loader"></div>
+          <iframe
+            src={modalIsOpen === true ? link : null}
+            title="YouTube Video"
+            allowFullScreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const VideoBannerComponent = () => {
+  const { videoDatas } = useContext(AllDataContext);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   return (
     <div className="VideoBanner">
+      <VideoPopup
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+        link={videoDatas?.link}
+      />
       <div className="wrapper">
         <div className="video-image-area">
           <div className="image">
-            <img
-              src="https://luxuryholidaynepal.com/_next/image?url=https%3A%2F%2Ffis-api.luxuryholidaynepal.com%2Fmedia%2Fpackage%2Fbanner%2Feverest-heli-tour.jpg&w=1920&q=75"
-              alt="video-image"
-            />
+            <img src={videoDatas?.image?.original_image} alt="video-image" />
           </div>
 
           <div className="content">
-            <h1 className="video-title">
-              Everest Base Camp Helicopter tour with landing from Kathmandu
-            </h1>
+            <h1 className="video-title">{videoDatas?.title}</h1>
 
             <div className="button-group">
-              <button className="explore">Exploer this Trip</button>
+              <Link>
+                <button className="explore">Exploer this Trip</button>
+              </Link>
 
-              <button className="video-play-btn">
+              <button
+                className="video-play-btn"
+                onClick={() => {
+                  setModalIsOpen(true);
+                }}
+              >
                 <i className="fas fa-play"></i>
               </button>
             </div>

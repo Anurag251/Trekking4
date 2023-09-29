@@ -13,7 +13,7 @@ const AwesomenessGuaranteePage = () => {
           <div className="awesomeness-guarantee-list">
             <div className="awesomeness-guarantee-item">
               <div className="guarantee-title">
-                When you book and become an sacred, you are covered by our
+                When you book and become, you are covered by our
                 'awesomeness guarantee'
               </div>
               

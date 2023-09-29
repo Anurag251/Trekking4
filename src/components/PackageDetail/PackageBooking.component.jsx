@@ -2,6 +2,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AllDataContext } from "../../context/AllData.context";
 import { apis } from "../../utils/apis";
+import ReCAPTCHA from "react-google-recaptcha";
+import { CustomInputComponent } from "../../pages/CustomTours.page";
 
 const PackageBookingComponent = ({
   selectedData,
@@ -27,63 +29,78 @@ const PackageBookingComponent = ({
     e.preventDefault();
     setButtonLoading(true);
 
-    if (
-      formValues.name !== "" ||
-      formValues.email !== "" ||
-      formValues.destination !== "" ||
-      formValues.dateOfTravel !== "" ||
-      formValues.noOfDays !== "" ||
-      formValues.noOfPerson !== ""
-    ) {
-      apis
-        .post("/booking", {
-          name: formValues.name,
-          email: formValues.email,
-          phone: formValues.phone,
-          destination: formValues.destination,
-          dateoftravel: formValues.dateOfTravel,
-          noofdays: formValues.noOfDays,
-          noofperson: formValues.noOfPerson,
-          comment: formValues.comment,
-          trip_id: selectedData.id,
-        })
-        .then((res) => {
-          // console.log(res);
-          if (res.status === 200) {
+    if (isCaptchaVerified) {
+      if (
+        formValues.name !== "" ||
+        formValues.email !== "" ||
+        formValues.destination !== "" ||
+        formValues.dateOfTravel !== "" ||
+        formValues.noOfDays !== "" ||
+        formValues.noOfPerson !== ""
+      ) {
+        apis
+          .post("/booking", {
+            name: formValues.name,
+            email: formValues.email,
+            phone: formValues.phone,
+            destination: formValues.destination,
+            dateoftravel: formValues.dateOfTravel,
+            noofdays: formValues.noOfDays,
+            noofperson: formValues.noOfPerson,
+            comment: formValues.comment,
+            trip_id: selectedData.id,
+          })
+          .then((res) => {
+            // console.log(res);
+            if (res.status === 200) {
+              setButtonLoading(false);
+              setMessage({
+                message: true,
+                title: "Thank you",
+                type: "success",
+                desc: `Your Package is booked`,
+              });
+              setFormValues({
+                ...formValues,
+                name: "",
+                email: "",
+                phone: "",
+                destination: "",
+                dateOfTravel: "",
+                noOfDays: "",
+                noOfPerson: "",
+                comment: "",
+              });
+            } else {
+              setMessage({
+                message: true,
+                title: "Please Try Again",
+                type: "error",
+                desc: `Something went wrong`,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
             setButtonLoading(false);
-            setMessage({
-              message: true,
-              title: "Thank you",
-              type: "success",
-              desc: `Your Package is booked`,
-            });
-            setFormValues({
-              ...formValues,
-              name: "",
-              email: "",
-              phone: "",
-              destination: "",
-              dateOfTravel: "",
-              noOfDays: "",
-              noOfPerson: "",
-              comment: "",
-            });
-          } else {
-            setMessage({
-              message: true,
-              title: "Please Try Again",
-              type: "error",
-              desc: `Something went wrong`,
-            });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          setButtonLoading(false);
+          });
+      } else {
+        setButtonLoading(false);
+        setMessage({
+          message: true,
+          title: "Failed",
+          type: "error",
+          desc: "All fields are required",
         });
+      }
     } else {
-      alert("All fields are required");
       setButtonLoading(false);
+      setMessage({
+        message: true,
+        title: "Failed",
+        type: "error",
+        desc: "Verify ReCaptcha",
+      });
     }
   };
 
@@ -93,8 +110,22 @@ const PackageBookingComponent = ({
     }
   }, [selectedData]);
 
+  console.log(choosenPrice);
+
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
+
+  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
+
+  const handleRecaptchaVerify = (value) => {
+    setIsCaptchaVerified(true);
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormValues({ ...formValues, [name]: value });
+  };
 
   return (
     <div
@@ -135,13 +166,13 @@ const PackageBookingComponent = ({
 
         <div className="title-sec">
           <div className="form-title">
-          Start Booking
-          <br />
-          <small>Date: {bookingPopupForm.date}</small>
+            Start Booking
+            <br />
+            <small>Date: {bookingPopupForm.date}</small>
           </div>
 
           <div className="price">
-            <span>per person</span> {bookingPopupForm.price}/-
+            <span>per person</span> {bookingPopupForm.price}
           </div>
         </div>
 
@@ -149,165 +180,100 @@ const PackageBookingComponent = ({
           <form onSubmit={handleSubmit}>
             <div className="form-inputs">
               <div className="input-group">
-                <div className="group">
-                  <label htmlFor="inputName">Name</label>
-                  <input
-                    className="form-input"
-                    id="inputName"
-                    type="text"
-                    onChange={(e) =>
-                      setFormValues({ ...formValues, name: e.target.value })
-                    }
-                    name="name"
-                    value={formValues.name}
-                    placeholder="Jhon"
-                  />
-                </div>
+                <CustomInputComponent
+                  type="text"
+                  name="name"
+                  label="Full Name"
+                  handleChange={handleChange}
+                  value={formValues.name}
+                />
 
-                <div className="group">
-                  <label htmlFor="inputPhone">
-                    Phone <span>(optional)</span>
-                  </label>
-                  <input
-                    className="form-input"
-                    id="inputPhone"
-                    type="number"
-                    onChange={(e) =>
-                      setFormValues({ ...formValues, phone: e.target.value })
-                    }
-                    name="phone"
-                    value={formValues.phone}
-                    placeholder="XXX XXXXXXX"
-                  />
-                </div>
+                <CustomInputComponent
+                  type="number"
+                  name="phone"
+                  label="Phone (optional)"
+                  handleChange={handleChange}
+                  value={formValues.phone}
+                />
               </div>
 
               <div className="input-group">
-                <div className="group">
-                  <label htmlFor="inputEmail">Email</label>
-                  <input
-                    className="form-input"
-                    id="inputEmail"
-                    type="text"
-                    onChange={(e) =>
-                      setFormValues({ ...formValues, email: e.target.value })
-                    }
-                    name="email"
-                    value={formValues.email}
-                    placeholder="something@example.com"
-                  />
-                </div>
+                <CustomInputComponent
+                  type="email"
+                  name="email"
+                  label="Email"
+                  handleChange={handleChange}
+                  value={formValues.email}
+                />
 
-                <div className="group">
-                  <label htmlFor="inputDestination">Destination</label>
-                  <input
-                    className="form-input"
-                    id="inputDestination"
-                    type="text"
-                    onChange={(e) =>
-                      setFormValues({
-                        ...formValues,
-                        destination: e.target.value,
-                      })
-                    }
-                    name="destination"
-                    value={formValues.destination}
-                    placeholder="Nepal"
-                  />
-                </div>
+                <CustomInputComponent
+                  type="text"
+                  name="destination"
+                  label="Destination"
+                  handleChange={handleChange}
+                  value={formValues.destination}
+                />
               </div>
 
-              <div className="input-group">
-                <div className="group">
-                  <label htmlFor="inputDateOfTravel">Date of Travel</label>
-                  <input
-                    className="form-input"
-                    id="inputDateOfTravel"
-                    type="text"
-                    onChange={(e) =>
-                      setFormValues({
-                        ...formValues,
-                        dateOfTravel: e.target.value,
-                      })
-                    }
-                    name="dateOfTravel"
-                    value={formValues.dateOfTravel}
-                    placeholder="YYYY-MM-DD"
-                  />
-                </div>
+              <CustomInputComponent
+                type="date"
+                name="dateOfTravel"
+                label="Date of Travel"
+                handleChange={handleChange}
+                value={formValues.dateOfTravel}
+                active
+              />
 
-                <div className="group">
-                  <label htmlFor="inputNoOfDays">No of Days</label>
-                  <input
-                    className="form-input"
-                    id="inputNoOfDays"
-                    type="text"
-                    onChange={(e) =>
-                      setFormValues({ ...formValues, noOfDays: e.target.value })
-                    }
-                    name="noOfDays"
-                    value={formValues.noOfDays}
-                    placeholder="1"
-                  />
-                </div>
-              </div>
+              <CustomInputComponent
+                type="text"
+                name="noOfDays"
+                label="No of Days eg: 14 Days"
+                handleChange={handleChange}
+                value={formValues.noOfDays}
+              />
 
-              <div className="input-group">
-                <div className="group">
-                  <label htmlFor="inputNoOfPerson">No of Person</label>
-                  <input
-                    className="form-input"
-                    id="inputNoOfPerson"
-                    type="text"
-                    onChange={(e) =>
-                      setFormValues({
-                        ...formValues,
-                        noOfPerson: e.target.value,
-                      })
-                    }
-                    name="noOfPerson"
-                    value={formValues.noOfPerson}
-                    placeholder="1"
-                  />
-                </div>
+              <CustomInputComponent
+                type="number"
+                name="noOfPerson"
+                label="No of Person"
+                handleChange={handleChange}
+                value={formValues.noOfPerson}
+              />
 
-                <div className="group">
-                  <label htmlFor="inputCommentRemarks">
-                    Comment/Remarks <span>(optional)</span>
-                  </label>
-                  <textarea
-                    className="form-input"
-                    id="inputCommentRemarks"
-                    cols="50"
-                    rows="3"
-                    onChange={(e) =>
-                      setFormValues({ ...formValues, comment: e.target.value })
-                    }
-                    name="comment"
-                    value={formValues.comment}
-                    placeholder="Write your message"
-                  ></textarea>
-                </div>
-              </div>
+              <CustomInputComponent
+                name="comment"
+                label="Comment/Remarks (optional)"
+                handleChange={handleChange}
+                value={formValues.comment}
+                textarea
+              />
 
-              <div className="group">
-                <label htmlFor="Message">Package Type</label>
-
-                <select
-                  name=""
-                  id=""
-                  onChange={(e) => setChoosenPrice(e.target.value)}
-                >
-                  {selectedData.price.map((price, idx) => (
-                    <option value={price.value} key={idx}>
-                      {price.label} Rs {price.value}/-
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {/* <CustomInputComponent
+                name="comment"
+                label="Comment/Remarks (optional)"
+                handleChange={(e) => setChoosenPrice(e.target.value)}
+                value={choosenPrice !== null ? choosenPrice : ""}
+                select
+              >
+                {selectedData.price.map((price, idx) => (
+                  <option value={price.value} key={idx}>
+                    {price.label} Rs {price.value}/-
+                  </option>
+                ))}
+              </CustomInputComponent> */}
             </div>
 
-            <button className={`submit-btn ${buttonLoading ? "active" : ""}`}>
+            <div className="recaptcha">
+              <ReCAPTCHA
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                onChange={handleRecaptchaVerify}
+              />
+            </div>
+
+            <button
+              className={`submit-btn ${buttonLoading ? "active" : ""}`}
+              disabled={isCaptchaVerified ? false : true}
+            >
               Book
             </button>
           </form>

@@ -10,7 +10,7 @@ const PackageComponent = () => {
     <section className="sec-bg">
       <div className="wrapper">
         <div className="special-package">
-          <div className="title">TOP Sacred Himalaya AdVentuRes</div>
+          <div className="title">TOP Himalaya AdVentuRes</div>
 
           <div className="list">
             {tripDatas &&

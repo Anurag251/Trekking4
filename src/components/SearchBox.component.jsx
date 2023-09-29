@@ -1,134 +1,92 @@
-import { useContext, useState } from "react";
-
-import { useNavigate } from "react-router-dom";
-import LoadingComponent from "./Loading.component";
-import { IconsCalendar, IconsMapMarker, IconsSandTime } from "./Icons.component";
+import { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { IconSearch } from "./Icons.component";
 import { AllDataContext } from "../context/AllData.context";
-import { apis } from "../utils/apis";
 
 const SearchFilterBoxComponent = () => {
-  const { countryDatas, setMessage } = useContext(AllDataContext);
-  const [buttonLoading, setButtonLoading] = useState(false);
+  const { tripDatas } = useContext(AllDataContext);
 
-  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState(tripDatas);
+  const [isFocused, setIsFocused] = useState(false);
 
-  const [formValues, setFormValues] = useState({
-    country: "",
-    duration: "",
-    tripYear: "",
-  });
+  const handleSearch = (event) => {
+    const { value } = event.target;
+    setSearchQuery(value);
 
-  const filterData = (e) => {
-    e.preventDefault();
-    setButtonLoading(true);
-
-    if (
-      formValues.country !== "" ||
-      formValues.duration !== "" ||
-      formValues.tripYear !== ""
-    ) {
-      apis
-        .post("/gettrip", {
-          country: formValues.country,
-          duration: formValues.duration,
-          tripyear: formValues.tripYear.split("-")[0],
-        })
-        .then((res) => {
-          setButtonLoading(false);
-          if (res.status === 200) {
-            if (res.data.data.length) {
-              navigate("/search", {
-                state: {
-                  searchedData: res.data.data,
-                },
-              });
-            } else {
-              setMessage({
-                message: true,
-                title: "Please Try Another",
-                type: "error",
-                desc: `No Package Found for ${formValues.duration}`,
-              });
-            }
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          setButtonLoading(false);
-        });
-    } else {
-      alert("All fields are required");
-      setButtonLoading(false);
-    }
+    // Filter data based on the search query for title, country, and season
+    const filtered = tripDatas.filter(
+      (item) =>
+        item.title.toLowerCase().includes(value.toLowerCase()) ||
+        (item.country &&
+          item.country.toLowerCase().includes(value.toLowerCase())) ||
+        (item.season && item.season.toLowerCase().includes(value.toLowerCase()))
+    );
+    setFilteredData(filtered);
   };
 
+  const handleSelectItem = (item) => {
+    setSearchQuery(item.title); // Set the selected item in the input
+    setIsFocused(false); // Hide the suggestion list
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const suggestionBox = document.getElementById("suggest-box");
+      const inputBox = document.getElementById("search-input");
+
+      if (
+        suggestionBox &&
+        !suggestionBox.contains(event.target) &&
+        inputBox &&
+        !inputBox.contains(event.target)
+      ) {
+        setIsFocused(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="package-search-area">
-      <form onSubmit={filterData} className="form">
-        <div className="package-search">
-          <div className="group">
-            <div className="icon">
-              <IconsMapMarker />
+    <div className="wrapper">
+      <div className="package-search-area">
+        <div className="form">
+          <div className="package-search">
+            <div className="group">
+              <div className="icon">
+                <IconSearch />
+              </div>
+
+              <input
+                type="search"
+                placeholder="Search by package, country, or season"
+                value={searchQuery}
+                onChange={handleSearch}
+                onFocus={() => setIsFocused(true)}
+                id="search-input"
+              />
             </div>
-
-            <select
-              name=""
-              id=""
-              onChange={(e) =>
-                setFormValues({ ...formValues, country: e.target.value })
-              }
-            >
-              <option value="">Type a Destination</option>
-
-              {countryDatas !== null
-                ? countryDatas?.map((countryData, idx) => (
-                    <option key={idx} value={countryData.country_name}>
-                      {countryData.country_name}
-                    </option>
-                  ))
-                : <LoadingComponent />}
-            </select>
           </div>
-
-          <div className="group">
-            <div className="icon">
-              <IconsSandTime />
+          {isFocused && filteredData.length > 0 && (
+            <div className="suggest-list" id="suggest-box">
+              <ul>
+                {filteredData.map((item) => (
+                  <li key={item.id} onClick={() => handleSelectItem(item)}>
+                    <Link to={`/package-details/${item.slug}`}>
+                      <button>{item.title}</button>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            <select
-              name=""
-              id=""
-              onChange={(e) =>
-                setFormValues({ ...formValues, duration: e.target.value })
-              }
-            >
-              <option value="">Number of days</option>
-              <option value="5-7 days">1-7 days</option>
-              <option value="7-10 days">7-10 days</option>
-              <option value="10-16 days">10-16 days</option>
-              <option value="16-30 days">16-30 days</option>
-            </select>
-          </div>
-
-          <div className="group">
-            <div className="icon">
-              <IconsCalendar />
-            </div>
-
-            <input
-              type="date"
-              placeholder="Select Month"
-              onChange={(e) =>
-                setFormValues({ ...formValues, tripYear: e.target.value })
-              }
-            />
-          </div>
-
-          <button className={`${buttonLoading ? "active" : ""}`}>
-            Check Availability
-          </button>
+          )}
         </div>
-      </form>
+      </div>
     </div>
   );
 };

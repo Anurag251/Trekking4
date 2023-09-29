@@ -12,7 +12,7 @@ const HtmlToParagraphs = ({ data, length, readMore }) => {
     const para = plainText.replace(/\s+/g, " ");
 
     const truncatedText =
-      content.length > length
+      content?.length > length
         ? paragraphLength
           ? para
           : `${para.slice(0, length)}...`

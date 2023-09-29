@@ -5,7 +5,7 @@ import { AllDataContext } from "../context/AllData.context";
 import { useContext, useEffect, useState } from "react";
 
 const BloggingDetailsPage = () => {
-  const { blogDatas, bookDatas } = useContext(AllDataContext);
+  const { blogDatas } = useContext(AllDataContext);
 
   const [selectedData, setSelectedData] = useState(null);
 
@@ -14,7 +14,7 @@ const BloggingDetailsPage = () => {
   useEffect(() => {
     if (blogDatas !== null) {
       blogDatas.forEach((data) => {
-        if (location.pathname.split("/")[2] == data.id) {
+        if (location.pathname.split("/")[2] == data.slug) {
           setSelectedData(data);
         }
       });
@@ -61,34 +61,6 @@ const BloggingDetailsPage = () => {
               </div>
             ))}
           </div>
-          <div className="blogging-search-area">
-            {/* <div className="blogging-search">
-              <div className="filter-keyword-sec">
-                <div className="filter-title">Previous Articles</div>
-                <ul className="all-bloggign-links">
-                  {blogDatas &&
-                    blogDatas.map((data, idx) => (
-                      <Link key={idx} to={`/blogging-details/${data.id}`}>
-                        <li> {data.title}</li>
-                      </Link>
-                    ))}
-                </ul>
-              </div>
-            </div> */}
-
-            {/*  <div className="blogging-search">
-              <div className="filter-keyword-sec">
-                <div className="filter-title">Search All</div>
-
-                <div className="filter-group">
-                  <input type="text" placeholder="Search..." />
-                  <button>
-                    <i className="fas fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </div> */}
-          </div>
         </div>
 
         <div className="blog-profile">
@@ -108,23 +80,6 @@ const BloggingDetailsPage = () => {
             <h4 className="role">{selectedData && selectedData.user.email}</h4>
           </div>
         </div>
-
-        <section>
-          <div className="title">
-            Sacred Himalaya is recommended by the Himalayantravel guide series
-            of books
-          </div>
-
-          <div className="book-list">
-            {bookDatas?.map((data, idx) => (
-              <div className="book-card" key={idx}>
-                <img src={data?.image} alt={data?.title} />
-
-                <h4 className="name">{data?.title}</h4>
-              </div>
-            ))}
-          </div>
-        </section>
       </div>
     </div>
   );

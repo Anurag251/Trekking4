@@ -3,9 +3,10 @@
 @use '../helpers/_variables' as *
 
 .testinomial
-  max-width: 1000px
-  margin: 0 auto
-  overflow: hidden
+  .wrapper
+    max-width: 1000px
+    margin: 0 auto
+    overflow: hidden
 
   .mySwiper
     position: relative
@@ -13,17 +14,17 @@
     width: 100%
 
     .swiper-button-next
-      &:hover
-        transform: scale(1.05) translateX(4px)
+      transform: translateX(10px)
 
+      &:hover
         &::after
           background-color: $pri
           color: $light
 
     .swiper-button-prev
-      &:hover
-        transform: scale(1.05) translateX(-4px)
+      transform: translateX(-10px)
 
+      &:hover
         &::after
           background-color: $pri
           color: $light
@@ -47,7 +48,7 @@
     @include flex($justify: center)
     flex-direction: column
     text-align: center
-    padding: 0 12rem
+    padding: 0 2rem
 
     .image-sec
       height: 100px
@@ -63,10 +64,11 @@
     .text-sec
       text-align: center
       .desc
-        font-size: 16px
+        font-size: 1rem
         color: $para
         line-height: 1.5rem
         margin: 1rem 0
+        text-align: justify
 
       .name
         font-size: 18px
@@ -79,3 +81,4 @@
 
       .read-more
         cursor: pointer
+        color: $dark

@@ -14,6 +14,9 @@ header
   @include trans()
   // height: 80px
 
+  &.hideHeader
+    position: relative
+
   &.hide
     position: fixed
     top: -200px
@@ -25,90 +28,101 @@ header
     @include trans()
 
   .wrapper
-    max-width: 1000px
+    max-width: 1200px
 
   .header-top
-    height: 4.2rem
-    @include flex($justify: space-between)
+    background-color: $bgColor
 
-    .logo
-      height: 60px
-      width: 190px
+    .social-icons
+      @include flex($justify: flex-start)
+      margin-left: 9rem
+      gap: 1rem
 
-      img
-        @include image()
-        object-fit: contain
+      i
+        font-size: .9rem
+
+      a
+        color: $pri
+
+    .header-contact
+      @include flex($justify: flex-end)
 
     .header-other
-      @include flex($justify: flex-end)
+      @include flex($justify: space-between)
       gap: .5rem
-
-    .trustpilot-widget
-      height: 3rem
-      width: 13rem
-      @include flex($justify: center)
-      overflow: hidden
-
-      iframe
-        height: 100%
-        width: 100%
-        overflow: hidden
-        display: none
-
-        html
-          overflow: hidden
-
-        body
-          @include flex($justify: center)
-          overflow: hidden !important
-
-          img
-            @include image()
-            object-fit: contain !important
-
-    .phoneNumber
-      height: 100%
-      text-align: right
-      padding: .7rem
-
-      p
-        font-size: .8rem
+      max-width: 1200px
+      margin: 0 auto
+      padding: 0 1rem
 
       .nav-btn
         gap: .5rem
-        font-size: 1.3rem
+        font-size: .8rem
         text-align: right
         @include flex($justify: flex-end)
         margin-right: 0 !important
         padding-right: 0
-        font-weight: 600
-        color: $pri
+        font-weight: 400
+        color: darken($light, 20%)
+
+        &:hover
+          color: $light
 
         .icon
-          height: 1.4rem
-          width: 1.4rem
+          height: .9rem
+          width: .9rem
 
           img
             @include image()
 
         i
-          font-size: 1.1rem
+          font-size: .9rem
+          color: $pri
+
+    .phoneNumber, .email
+      height: 100%
+      text-align: right
+      padding: .6rem
+
+      p
+        font-size: .8rem
+
+        a
+          color: $pri
+          font-weight: 500
+
+    .phoneNumber
+      .contact-link
+        border-right: 1px solid darken($light, 50%)
+        padding-right: 1.5rem
+
+    .email
+      padding-right: 0
+
+  .nav-menu-area
+    background-color: $sec
 
   .inner
     @include flex($justify: space-between)
     height: 3.5rem
     border-top: 1px solid rgba($dark, .15)
+    max-width: 1200px
+    margin: 0 auto
+    position: relative
+    padding: 0 1rem
 
     .logo
-      height: 50px
+      height: 178%
       width: 140px
+      position: absolute
+      left: 0
+      bottom: 0
 
       img
         @include image()
         object-fit: contain
 
     .nav-links
-      @include flex($justify: space-between)
+      @include flex($justify: flex-end)
       height: 100%
       width: 100%
 
@@ -123,9 +137,9 @@ header
         .drop-down
           position: absolute
           top: 3.4rem
-          left: 100%
+          left: 50%
           transform: translateX(-50%)
-          width: 14.5rem
+          width: 18.5rem
           background-color: $darkBg
           pointer-events: none
           opacity: 0
@@ -182,9 +196,9 @@ header
         height: 100%
         font-size: 1.06rem
         text-transform: uppercase
-        color: $dark
+        color: $light
         cursor: pointer
-        font-weight: 500
+        font-weight: 600
         padding: 0 .8rem
 
         // &:nth-last-child(1), &:nth-last-child(2)
@@ -200,8 +214,8 @@ header
     position: relative
     cursor: pointer
     display: none
-    background-color: $pri
-    box-shadow: 0 0 0 .5rem $pri
+    background-color: $light
+    box-shadow: 0 0 0 .5rem $light
     border-radius: .1rem
 
     &.active
@@ -218,13 +232,13 @@ header
       right: 0
       width: 100%
       height: 2.5px
-      background-color: $light
+      background-color: $pri
       border-radius: 10px
       @include trans()
 
     .das
       height: 2.5px
-      background-color: $light
+      background-color: $pri
       border-radius: 10px
       width: 100%
       @include trans()
@@ -236,20 +250,22 @@ header
       left: 0
       width: 100%
       height: 2.5px
-      background-color: $light
+      background-color: $pri
       border-radius: 10px
       @include trans()
 
 /***********      side-nav      ***********/
 .side-nav
+  display: none
   position: fixed
   top: 0
-  left: -300px
-  width: 260px
+  left: -440px
+  width: 400px
   height: 100%
   z-index: 100
   // background: linear-gradient(30deg, rgba($pri, .85), rgba($sec, .85))
-  background-color: #252525
+  border: 1rem solid rgba($light, .1)
+  background-color: $sec
   backdrop-filter: blur(10px)
   pointer-events: none
   @include trans()
@@ -260,11 +276,11 @@ header
 
   .side-nav-close-btn
     position: absolute
-    top: 0
-    right: -30px
+    top: -1rem
+    right: -45px
     height: 30px
     width: 30px
-    background-color: $sec
+    background-color: $pri
     @include flex($justify: center)
     color: $light
     font-size: 14px
@@ -276,25 +292,32 @@ header
     padding: 1rem 0
 
     img
-      height: 60px
-      width: 160px
+      height: 100px
+      width: 200px
       object-fit: contain
 
     h3
       color: $light
 
+  .nav-links-area
+    height: 80vh
+    overflow: auto
+    padding-bottom: 6rem
+
   .nav-links
     padding: 0 1rem
 
     .nav-btn
-      padding: .6rem .7rem
-      font-size: 16px
+      padding: .8rem .7rem
+      font-size: 1rem
+      background-color: rgba($light, .1)
       color: $light
       cursor: pointer
       width: 100%
       text-align: left
-      margin-bottom: .5rem
+      margin-bottom: 1rem
       border-radius: 6px
+      text-transform: capitalize
 
       &:hover
         background-color: rgba($light,.2)
@@ -303,9 +326,10 @@ header
         background-color: rgba($light,.2)
 
     .drop-menu
-      &:hover
+      &.active
         .drop-down-area
           grid-template-rows: 1fr
+          margin-bottom: 1rem
 
       .drop-down-area
         display: grid
@@ -314,7 +338,7 @@ header
 
         .drop-down
           overflow: hidden
-          background-color: rgba($light, .2)
+          background-color: rgba($light, .1)
           border-radius: 6px
 
           li
@@ -329,6 +353,10 @@ header
               color: $light
               cursor: pointer
               text-align: left
+              font-size: .9rem
+
+              &.active
+                background-color: rgba($light, .2)
 
 .big-drop-down
   position: fixed

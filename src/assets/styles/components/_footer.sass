@@ -11,7 +11,7 @@ footer
   &::before
     content: ''
     @include dark($opacity: .0)
-    background-color: rgba($light, .95)
+    background-color: rgba($sec, .9)
 
   .footer-list
     @include grid($columns: 1fr 1fr 1fr 1fr)
@@ -33,17 +33,20 @@ footer
       .f-title
         font-size: 24px
         font-weight: 500
+        color: $light
 
       ul
         li
           padding: .4rem 0
           cursor: pointer
+          color: $light
 
           i
             margin-right: 5px
+            color: $light
 
           a
-            color: $dark
+            color: $light
             width: 100%
 
       .desc
@@ -57,9 +60,10 @@ footer
     padding-top: 2rem
     margin-top: 2rem
     border-top: 1px solid #ADADAD
-    color: $dark
+    color: $light
     z-index: 2
     @include flex($justify: space-between)
+    font-size: .7rem
 
     .icons
       @include flex($justify: flex-end)
@@ -68,4 +72,4 @@ footer
         padding: 0 1rem
 
         a
-          color: $dark
+          color: $light

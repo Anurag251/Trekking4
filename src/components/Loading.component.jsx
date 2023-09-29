@@ -1,5 +1,5 @@
 import Lottie from "lottie-react";
-import animationData from "/public/lottieflow-loading-04-1-0168b7-easey.json";
+import animationData from "../assets/lottieflow-loading-04-2-0168b7-easey.json";
 
 const LoadingComponent = () => {
   return (
@@ -8,7 +8,7 @@ const LoadingComponent = () => {
         animationData={animationData}
         loop
         autoplay
-        style={{ width: "300px", height: "300px" }}
+        style={{ width: "200px", height: "200px" }}
       />
     </div>
   );

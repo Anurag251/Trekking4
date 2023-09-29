@@ -1,14 +1,8 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-
-import { EffectFade, Autoplay } from "swiper";
 import { AllDataContext } from "../context/AllData.context";
+import HtmlToParagraphs from "./HtmlToParagraphs.component";
+import { Link } from "react-router-dom";
 
 const AboutSacredComponent = () => {
   const { aboutDetails } = useContext(AllDataContext);
@@ -17,43 +11,36 @@ const AboutSacredComponent = () => {
     <div className="About_us">
       <section className="bg-color">
         <div className="wrapper">
-          <div className="item">
-            <div className="images-area">
-              <img
-                src="https://images.pexels.com/photos/869258/pexels-photo-869258.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                alt=""
-              />
-            </div>
+          {aboutDetails
+            ?.filter((data) => data.page_type === 7)
+            .map((data, idx) => (
+              <div className="item" key={idx}>
+                <div className="images-area" data-aos="fade-down">
+                  <img src={data?.image?.original_image} alt={data.title} />
+                </div>
 
-            <div className="content">
-              <h1>About Sherpa-Tech</h1>
-              {/* <p
-                className="desc"
-                dangerouslySetInnerHTML={{
-                  __html:
-                    aboutDetails !== null
-                      ? aboutDetails[1].description.length > 500
-                        ? `${aboutDetails[1].description.slice(0, 500)}...`
-                        : aboutDetails[1].description
-                      : "",
-                }}
-              /> */}
+                <div className="content" data-aos="fade-down">
+                  <h1>{data.title}</h1>
+                  {/* <p
+                  className="desc"
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      aboutDetails !== null
+                        ? aboutDetails[1].description.length > 500
+                          ? `${aboutDetails[1].description.slice(0, 500)}...`
+                          : aboutDetails[1].description
+                        : "",
+                  }}
+                /> */}
 
-              <p
-                className="desc"
-                dangerouslySetInnerHTML={{
-                  __html:
-                    "Towering high above Nepal, Tibet and Bhutan are the majestic Himalayan Mountains, home to the highest and most magnificent peaks on earth. To the people of the region, these mountains are sacred. Most know of Everest, the highest peak on the planet. <br> <br> A peak conquered for the first time in 1953 by Sir  Edmund Hillary and Tenzing Towering high above Nepal, Tibet and Bhutan are the majestic Himalayan Mountains, home to the highest and most magnificent peaks on earth. To the people of the region, these mountains are sacred. Most know of Everest, the highest peak on the planet. A peak conquered for the first time in 1953 by Sir  Edmund Hillary and Tenzing <br /> <br /> Towering high above Nepal, Tibet and Bhutan are the majestic Himalayan Mountains...",
-                }}
-              />
+                  <HtmlToParagraphs data={data?.description} length={700} />
 
-              <div className="button-group">
-                <Link to="/about-us">
-                  <button>Why Choose Sherpa Tech?</button>
-                </Link>
+                  <Link to={`/about/${data.slug}`}>
+                    <button>Read More</button>
+                  </Link>
+                </div>
               </div>
-            </div>
-          </div>
+            ))}
         </div>
       </section>
     </div>

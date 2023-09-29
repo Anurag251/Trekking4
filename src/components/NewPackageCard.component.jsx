@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 
 const NewPackageCardComponent = ({ data }) => {
   return (
-    <Link to={`/package-details/${data.id}`}>
-      <div className="packageCardComponent">
+    <Link to={`/package-details/${data.slug}`}>
+      <div className="packageCardComponent" data-aos="fade-down">
         <div className="image-area">
           <div className="image">
             <img src={data.image?.original_image} alt={data.title} />
           </div>
-
-          <div className="booking">Booking Open</div>
+          {data.recommended === 1 ? (
+            <div className="booking">Booking Open</div>
+          ) : null}
 
           <div className="time">{data.duration}</div>
           <div className="country">{data.country}</div>
@@ -23,10 +24,10 @@ const NewPackageCardComponent = ({ data }) => {
 
           <div className="card-footer">
             <div className="prices">
-              Rs {data.price[0].value && data.price[0].value} /-
+              {data.price[0].value && data.price[0].value}
             </div>
 
-            <button className="book-btn">Book Now</button>
+            <button className="book-btn">See Details</button>
           </div>
         </div>
       </div>

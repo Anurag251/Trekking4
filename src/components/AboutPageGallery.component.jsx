@@ -39,11 +39,15 @@ const AboutPageGalleryComponent = () => {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-      {galleryDatas?.map((data, idx) => (
-        <SwiperSlide key={idx}>
-          <img src={data?.original_image} alt={data?.title} />
-        </SwiperSlide>
-      ))}
+        {galleryDatas?.map((data, idx) => (
+          <SwiperSlide key={idx}>
+            <img
+              src={data?.original_image}
+              alt={data?.title}
+              data-aos="fade-down"
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

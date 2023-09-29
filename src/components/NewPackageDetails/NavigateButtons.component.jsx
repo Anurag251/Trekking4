@@ -13,44 +13,71 @@ const NavigateButtonsComponent = () => {
               detailsPageNav === "TripOverview" ? "active" : ""
             }`}
             onClick={() => {
-              window.scroll(0, 600);
+              window.scroll(0, 470);
               setDetailsPageNav("TripOverview");
             }}
           >
-            Trip Overview
+            Overview
           </button>
+
           <button
             className={`navigateBtn ${
               detailsPageNav === "Itinerary" ? "active" : ""
             }`}
             onClick={() => {
-              window.scroll(0, 600);
+              window.scroll(0, 470);
               setDetailsPageNav("Itinerary");
             }}
           >
             Itinerary
           </button>
+
+          <button
+            className={`navigateBtn ${
+              detailsPageNav === "Includes & Excludes" ? "active" : ""
+            }`}
+            onClick={() => {
+              window.scroll(0, 470);
+              setDetailsPageNav("Includes & Excludes");
+            }}
+          >
+            Includes & Excludes
+          </button>
+
           <button
             className={`navigateBtn ${
               detailsPageNav === "DatePrices" ? "active" : ""
             }`}
             onClick={() => {
-              window.scroll(0, 600);
+              window.scroll(0, 470);
               setDetailsPageNav("DatePrices");
             }}
           >
-            Date & Prices
+            Departure Date & Price
           </button>
+
           <button
             className={`navigateBtn ${
-              detailsPageNav === "MoreInfo" ? "active" : ""
+              detailsPageNav === "Trip Notes" ? "active" : ""
             }`}
             onClick={() => {
-              window.scroll(0, 600);
-              setDetailsPageNav("MoreInfo");
+              window.scroll(0, 470);
+              setDetailsPageNav("Trip Notes");
             }}
           >
-            Equipments
+            Trip Notes
+          </button>
+        </div>
+
+        <div className="last-button">
+          <button
+            className={`bookNowNutton`}
+            onClick={() => {
+              window.scroll(0, 470);
+              setDetailsPageNav("DatePrices");
+            }}
+          >
+            Book Now
           </button>
         </div>
       </div>

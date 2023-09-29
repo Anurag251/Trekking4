@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -10,19 +11,28 @@ import { Autoplay } from "swiper";
 
 import { useContext } from "react";
 import { AllDataContext } from "../context/AllData.context";
+import { Link } from "react-router-dom";
 
-const OurPartnersComponent = () => {
-  const { reviewDatas } = useContext(AllDataContext);
+const OurPartnersComponent = ({ title }) => {
+  const { partnersDatas } = useContext(AllDataContext);
 
   return (
     <div className="OurPartners">
       <section>
         <div className="wrapper">
-          <div className="title">Certificates & Partners</div>
+          <div className="title-part no-bg">
+            <div
+              className="name"
+              style={{ textAlign: "left" }}
+              data-aos="fade-down"
+            >
+              {title}
+            </div>
+          </div>
 
-          <div className="list">
+          <div className="list" data-aos="fade-down">
             <Swiper
-              slidesPerView={3}
+              slidesPerView={2}
               spaceBetween={10}
               speed={1000}
               autoplay={{
@@ -31,92 +41,31 @@ const OurPartnersComponent = () => {
               }}
               breakpoints={{
                 640: {
-                  slidesPerView: 4,
+                  slidesPerView: 3,
                   spaceBetween: 30,
                 },
                 768: {
-                  slidesPerView: 5,
+                  slidesPerView: 4,
                   spaceBetween: 30,
                 },
                 1024: {
-                  slidesPerView: 6,
+                  slidesPerView: 5,
                   spaceBetween: 30,
                 },
               }}
               modules={[Autoplay, FreeMode]}
               className="mySwiper"
             >
-              <SwiperSlide>
-                <div className="item">
-                  <img
-                    src="https://luxuryholidaynepal.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnepal-goverment.c0cead5d.png&w=96&q=75"
-                    alt="user-image"
-                  />
-                </div>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <div className="item">
-                  <img
-                    src="https://luxuryholidaynepal.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fntb.20cc59e8.png&w=96&q=75"
-                    alt="user-image"
-                  />
-                </div>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <div className="item">
-                  <img
-                    src="https://luxuryholidaynepal.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftaan.06f60855.png&w=64&q=75"
-                    alt="user-image"
-                  />
-                </div>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <div className="item">
-                  <img
-                    src="https://luxuryholidaynepal.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnma.006f2806.png&w=96&q=75"
-                    alt="user-image"
-                  />
-                </div>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <div className="item">
-                  <img
-                    src="https://luxuryholidaynepal.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftripadvisor.301d58fa.png&w=256&q=75"
-                    alt="user-image"
-                  />
-                </div>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <div className="item">
-                  <img
-                    src="https://luxuryholidaynepal.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-tour-radar.8dfc1749.png&w=256&q=75"
-                    alt="user-image"
-                  />
-                </div>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <div className="item">
-                  <img
-                    src="https://luxuryholidaynepal.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-viator.769739cb.png&w=128&q=75"
-                    alt="user-image"
-                  />
-                </div>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <div className="item">
-                  <img
-                    src="https://luxuryholidaynepal.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbookmundi.2794f0cb.png&w=256&q=75"
-                    alt="user-image"
-                  />
-                </div>
-              </SwiperSlide>
+              {partnersDatas &&
+                partnersDatas?.map((data, idx) => (
+                  <SwiperSlide key={idx}>
+                    <Link to={data.link} title={data.title} target="blank">
+                      <div className="item">
+                        <img src={data?.image} alt={data.title} />
+                      </div>
+                    </Link>
+                  </SwiperSlide>
+                ))}
             </Swiper>
           </div>
         </div>

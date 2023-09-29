@@ -7,36 +7,51 @@ const MoreInfoComponent = ({ data }) => {
 
   return (
     <div
-      className={`MoreInfoSection ${
-        detailsPageNav === "MoreInfo" ? "active" : ""
+      className={`MoreInfoSection includeExcludes ${
+        detailsPageNav === "Includes & Excludes" ? "active" : ""
       }`}
     >
       <section>
         <div className="wrapper">
           <div
             className={`inner-details-button ${
-              detailsPageNav === "MoreInfo" ? "show-details" : ""
+              detailsPageNav === "Includes & Excludes" ? "show-details" : ""
             }`}
           >
             <div
               className="main-title"
               onClick={() => {
                 window.scroll(0, 370);
-                setDetailsPageNav("MoreInfo");
+                setDetailsPageNav("Includes & Excludes");
               }}
             >
-              Equipments <i className="fas fa-angle-down"></i>
+              Includes & Excludes <i className="fas fa-angle-down"></i>
             </div>
 
             <div className="inner-details">
               <div className="main-container">
                 <div className="TripOverviewMainContent">
-                  <p
-                    className="desc"
-                    dangerouslySetInnerHTML={{
-                      __html: data.equipments,
-                    }}
-                  />
+                  <div className="IncludesArea">
+                    <h2>Includes</h2>
+
+                    <p
+                      className="desc"
+                      dangerouslySetInnerHTML={{
+                        __html: data?.include,
+                      }}
+                    />
+                  </div>
+
+                  <div className="ExcludeArea">
+                    <h2>Exclude</h2>
+
+                    <p
+                      className="desc"
+                      dangerouslySetInnerHTML={{
+                        __html: data?.exclude,
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

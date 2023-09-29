@@ -19,6 +19,9 @@ export const AllDataProvider = ({ children }) => {
   const [filterPackage, setFilterPackage] = useState(false);
   const [contactDatas, setContactDatas] = useState(null);
   const [quickLinkDatas, setQuickLinkDatas] = useState(null);
+  const [whyChooseUs, setWhyChooseUs] = useState(null);
+  const [partnersDatas, setPartnersDatas] = useState(null);
+  const [videoDatas, setVideoDatas] = useState(null);
   const [contactPopup, setContactPopup] = useState(false);
   const [countPackage, setCountPackage] = useState(null);
   const [showFilter, setShowFilter] = useState(false);
@@ -40,6 +43,7 @@ export const AllDataProvider = ({ children }) => {
   const [searchData, setSearchData] = useState(null);
   const [selectedDatas, setSelectedDatas] = useState(null);
   const [detailsPageNav, setDetailsPageNav] = useState("TripOverview");
+  const [hitAgain, setHitAgain] = useState(false);
 
   useEffect(() => {
     if (
@@ -65,15 +69,107 @@ export const AllDataProvider = ({ children }) => {
     categoriesDatas,
   ]);
 
+  // console.log(bannerDatas);
+  // console.log(blogDatas);
+  // console.log(tripDatas);
+  // console.log(teamDatas);
+  // console.log(reviewDatas);
+  // console.log(countryDatas);
+  // console.log(categoriesDatas);
+
   useEffect(() => {
+    /****** banner ******/
+    {
+      /* const apiCall = async () => {
+    const bannerResponse = await apis.get("/banner");
+    const tripResponse = await apis.get("/trip");
+    const contentResponse = await apis.get("/home/content");
+    const teamsResponse = await apis.get("/teams");
+    const reviewResponse = await apis.get("/review");
+    const countryResponse = await apis.get("/country");
+    const tripcategoryResponse = await apis.get("/tripcategory");
+    const galleryResponse = await apis.get("/gallery");
+    const pageResponse = await apis.get("/page");
+    const quicklinkResponse = await apis.get("/quicklink");
+    const settingsResponse = await apis.get("/settings");
+    const sacredResponse = await apis.get("/sacred");
+    const bookResponse = await apis.get("/book");
+    const videobannerResponse = await apis.get("/videobanner");
+
+    if (bannerResponse.status === 200) {
+      setBannerDatas(bannerResponse.data.data);
+    }
+
+    if (tripResponse.status === 200) {
+      setTripDatas(tripResponse.data.data);
+    }
+
+    if (contentResponse.status === 200) {
+      setBlogDatas(contentResponse.data.data);
+    }
+
+    if (teamsResponse.status === 200) {
+      setTeamDatas(teamsResponse.data.data);
+    }
+
+    if (reviewResponse.status === 200) {
+      setReviewDatas(reviewResponse.data.data);
+    }
+
+    if (countryResponse.status === 200) {
+      setCountryDatas(countryResponse.data.data);
+    }
+
+    if (tripcategoryResponse.status === 200) {
+      setCategoriesDatas(tripcategoryResponse.data.data);
+    }
+
+    if (galleryResponse.status === 200) {
+      setGalleryDatas(galleryResponse.data.data);
+    }
+
+    if (pageResponse.status === 200) {
+      setAboutDetails(pageResponse.data.data);
+    }
+
+    if (quicklinkResponse.status === 200) {
+      setQuickLinkDatas(quicklinkResponse.data.data);
+    }
+
+    if (settingsResponse.status === 200) {
+      setContactDatas(settingsResponse.data.data);
+    }
+
+    if (sacredResponse.status === 200) {
+      setWhyChooseUs(sacredResponse.data.data);
+    }
+
+    if (bookResponse.status === 200) {
+      setPartnersDatas(bookResponse.data.data);
+    }
+
+    if (videobannerResponse.status === 200) {
+      setVideoDatas(videobannerResponse.data.data);
+    }
+  };
+
+  apiCall(); */
+    }
+
     /****** banner ******/
     apis
       .get("/banner")
       .then((res) => {
         if (res.status === 200) {
           setBannerDatas(res.data.data);
-          // console.log("banner: ");
-          // console.log(res.data.data);
+          // console.log("trip: ");
+          // console.log(res);
+
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
         }
       })
       .catch((err) => {
@@ -89,6 +185,11 @@ export const AllDataProvider = ({ children }) => {
           setCountPackage(res.data.data?.length);
           // console.log("trip: ");
           // console.log(res.data.data);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
         }
       })
       .catch((err) => {
@@ -103,6 +204,11 @@ export const AllDataProvider = ({ children }) => {
           setBlogDatas(res.data.data && res.data.data.latest_post);
           // console.log("blog: ");
           // console.log(res.data.data.latest_post);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
         }
       })
       .catch((err) => {
@@ -117,6 +223,11 @@ export const AllDataProvider = ({ children }) => {
           setTeamDatas(res.data.data);
           // console.log("teams: ");
           // console.log(res.data.data);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
         }
       })
       .catch((err) => {
@@ -131,6 +242,11 @@ export const AllDataProvider = ({ children }) => {
           setReviewDatas(res.data.data);
           // console.log("review: ");
           // console.log(res.data.data);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
         }
       })
       .catch((err) => {
@@ -145,6 +261,11 @@ export const AllDataProvider = ({ children }) => {
           setCountryDatas(res.data.data);
           // console.log("review: ");
           // console.log(res.data.data);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
         }
       })
       .catch((err) => {
@@ -158,6 +279,11 @@ export const AllDataProvider = ({ children }) => {
           setCategoriesDatas(res.data.data);
           // console.log("review: ");
           // console.log(res.data.data);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
         }
       })
       .catch((err) => {
@@ -171,6 +297,11 @@ export const AllDataProvider = ({ children }) => {
           setGalleryDatas(res.data.data);
           // console.log("review: ");
           // console.log(res.data.data);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
         }
       })
       .catch((err) => {
@@ -184,6 +315,11 @@ export const AllDataProvider = ({ children }) => {
           setAboutDetails(res.data.data);
           // console.log("review: ");
           // console.log(res.data.data);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
         }
       })
       .catch((err) => {
@@ -197,6 +333,11 @@ export const AllDataProvider = ({ children }) => {
           setQuickLinkDatas(res.data.data);
           // console.log("review: ");
           // console.log(res.data.data);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
         }
       })
       .catch((err) => {
@@ -210,12 +351,71 @@ export const AllDataProvider = ({ children }) => {
           setContactDatas(res.data.data);
           // console.log("review: ");
           // console.log(res.data.data);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
         }
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+
+    apis
+      .get("/sacred")
+      .then((res) => {
+        if (res.status === 200) {
+          setWhyChooseUs(res.data.data);
+          // console.log("review: ");
+          // console.log(res.data.data);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    apis
+      .get("/book")
+      .then((res) => {
+        if (res.status === 200) {
+          setPartnersDatas(res.data.data);
+          // console.log("review: ");
+          // console.log(res.data.data);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    apis
+      .get("/videobanner")
+      .then((res) => {
+        if (res.status === 200) {
+          setVideoDatas(res.data.data);
+          // console.log("review: ");
+          // console.log(res.data.data);
+          if (res.data === "") {
+            setTimeout(() => {
+              setHitAgain(!hitAgain);
+            }, 1000);
+          }
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [hitAgain]);
 
   return (
     <AllDataContext.Provider
@@ -266,6 +466,9 @@ export const AllDataProvider = ({ children }) => {
         setShowFilter,
         bookingPopupForm,
         setBookingPopupForm,
+        whyChooseUs,
+        partnersDatas,
+        videoDatas,
       }}
     >
       {children}

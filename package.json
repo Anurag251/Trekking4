@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "axios": "^1.4.0",
+    "cheerio": "^1.0.0-rc.12",
     "lottie-react": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-recaptcha": "^3.1.0",
     "react-router-dom": "^6.11.2",
     "sass": "^1.62.1",
     "swiper": "^9.3.2"

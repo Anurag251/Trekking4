@@ -1,17 +1,14 @@
 /* eslint-disable react/prop-types */
 import { Link, useNavigate } from "react-router-dom";
-import footerImage from "../assets/images/footerbg.jpg";
 import { useContext } from "react";
 import { AllDataContext } from "../context/AllData.context";
-import Logo from "../assets/images/sherpa-tech-logo.svg";
-import HtmlToParagraphs from "./HtmlToParagraphs.component";
+import Logo from "../assets/images/Nepal_bird_watching_logo.png";
+import footerBg from "../assets/images/footer_bg.jpeg";
 import OurPartnersComponent from "./OurPartners.component";
-import HelpfulYetisComponent from "./HelpfulYetis.component";
 
-const FooterComponent = () => {
+const FooterComponent = ({ title }) => {
   const {
     categoriesDatas,
-    setSelectedCate,
     contactDatas,
     aboutDetails,
     contactPopup,
@@ -23,77 +20,28 @@ const FooterComponent = () => {
   return (
     <footer
       style={{
-        backgroundImage: `url(https://8kexpeditions.com/images/about-intro.jpg)`,
+        backgroundImage: `url(${footerBg})`,
       }}
     >
       <div className="wrapper">
-        <OurPartnersComponent />
+        <OurPartnersComponent title={title} />
 
         <div className="footer-list">
-          <div className="item">
+          <div className="item" data-aos="fade-down">
             <Link to="/">
               <div className="logo">
-                <img src={Logo} alt="logo" />
+                <img
+                  src={
+                    contactDatas &&
+                    contactDatas?.branding?.logo !== null &&
+                    contactDatas?.branding?.logo !== undefined
+                      ? contactDatas?.branding?.logo
+                      : Logo
+                  }
+                  alt="logo"
+                />
               </div>
             </Link>
-
-            {/* <HtmlToParagraphs
-              data={
-                aboutDetails !== ""
-                  ? aboutDetails !== null
-                    ? aboutDetails[0].description
-                    : "No Descriptions"
-                  : ""
-              }
-              length={200}
-            /> */}
-          </div>
-
-          <div className="item">
-            <div className="f-title">Useful Links</div>
-
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/packages">Adventures</Link>
-              </li>
-              <li>
-                <Link to="/blogging">Blog</Link>
-              </li>
-              <li onClick={() => setContactPopup(!contactPopup)}>Contact</li>
-            </ul>
-          </div>
-
-          <div className="item">
-            <div className="f-title">Packages</div>
-
-            <ul>
-              {categoriesDatas &&
-                categoriesDatas.map((data, idx) => (
-                  <li
-                    key={idx}
-                    onClick={() => {
-                      setSelectedCate(data.id);
-                      navigate(`/expedition-details/${data.id}`, {
-                        state: {
-                          searchedData: data.trips,
-                        },
-                      });
-                    }}
-                  >
-                    {data.category_name}
-                  </li>
-                ))}
-            </ul>
-          </div>
-
-          <div className="item">
-            <div className="f-title">Support Links</div>
 
             <ul>
               <li>
@@ -115,8 +63,105 @@ const FooterComponent = () => {
                   {contactDatas && contactDatas.branding.email}
                 </a> */}
 
-                <a href={`mailto:info@sherpa-tech.com`}>info@sherpa-tech.com</a>
+                <a
+                  href={`mailto:${contactDatas && contactDatas.branding.email}`}
+                >
+                  {contactDatas && contactDatas.branding.email}
+                </a>
               </li>
+            </ul>
+
+            {/* <HtmlToParagraphs
+              data={
+                aboutDetails !== ""
+                  ? aboutDetails !== null
+                    ? aboutDetails[0].description
+                    : "No Descriptions"
+                  : ""
+              }
+              length={200}
+            /> */}
+          </div>
+
+          <div className="item" data-aos="fade-down">
+            <div className="f-title">Useful Links</div>
+
+            <ul>
+              {aboutDetails
+                ?.filter(
+                  (data) =>
+                    data.slug !== "about-us" &&
+                    data.page_type !== 4 &&
+                    data.slug !== "message-from-the-director" &&
+                    data.page_type !== 5 &&
+                    data.page_type !== 6
+                )
+                .map((data, idx) => (
+                  <li key={idx}>
+                    <Link to={`/about/${data.slug}`}>{data.title}</Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+
+          <div className="item" data-aos="fade-down">
+            <div className="f-title">Activities</div>
+
+            <ul>
+              {categoriesDatas &&
+                categoriesDatas.map((data, idx) => (
+                  <li
+                    key={idx}
+                    onClick={() => {
+                      navigate(data.slug);
+                    }}
+                  >
+                    {data.category_name}
+                  </li>
+                ))}
+            </ul>
+          </div>
+
+          <div className="item" data-aos="fade-down">
+            <div className="f-title">Company</div>
+
+            {contactDatas?.menu[0]?.menu_item
+              ?.filter((data) => data.label === "About Us")
+              .map((data, idx) => (
+                <ul key={idx}>
+                  {data.children.map((subMenu, idx) => (
+                    <li key={idx}>
+                      <Link
+                        to={
+                          subMenu?.url === "/meet-the-team" ||
+                          subMenu?.url === "/blog"
+                            ? `${subMenu?.url}`
+                            : `/about${subMenu?.url}`
+                        }
+                      >
+                        {subMenu.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ))}
+
+            <ul>
+              {aboutDetails
+                ?.filter((data) => data.page_type === 4)
+                .map((data, idx) => (
+                  <li key={idx}>
+                    <Link to={`/${data.slug}`}>{data.title}</Link>
+                  </li>
+                ))}
+
+              {contactDatas?.menu[0]?.menu_item
+                ?.filter((data) => data?.url === "/contacts")
+                .map((data, idx) => (
+                  <li key={idx}>
+                    <Link to={data.url}>{data?.label}</Link>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
@@ -124,7 +169,7 @@ const FooterComponent = () => {
         {/* <HelpfulYetisComponent /> */}
 
         <div className="copyright">
-          <span>© Copyright 2022 Company </span>
+          <span> {contactDatas && contactDatas.branding.copyright_text} </span>
 
           <div className="icons">
             {contactDatas && contactDatas.social_media.fb_url !== null ? (

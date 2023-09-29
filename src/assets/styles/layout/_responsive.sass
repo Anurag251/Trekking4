@@ -2,76 +2,75 @@
 @use '../layout/_grid' as *
 @use '../helpers/_variables' as *
 
-@media only screen and (max-width: 2000px)
-  .NavigateButtons
-    top: 4rem
-    .button-list
-      display: none
+// @media only screen and (max-width: 2000px)
+//   .NavigateButtons
+//     top: 4rem
+//     .button-list
 
-  .TripOverview
-    margin-top: 3rem
+//   .TripOverview
+//     margin-top: 3rem
 
-  .TripOverview, .ItinerarySection, .DateAndPriceSection, .MoreInfoSection
-    opacity: 1 !important
-    height: 100% !important
-    pointer-events: auto
-    background: none !important
+//   .TripOverview, .ItinerarySection, .DateAndPriceSection, .MoreInfoSection
+//     opacity: 1 !important
+//     height: 100% !important
+//     pointer-events: auto
+//     background: none !important
 
-    section
-      padding: 0
-      border: 0
+//     section
+//       padding: 0
+//       border: 0
 
-  .MoreInfoSection
-    .inner-details-button
-      border-bottom: none
+//   .MoreInfoSection
+//     .inner-details-button
+//       border-bottom: none
 
-  .inner-details-button
-    background-color: $light
-    border-bottom: 1px solid rgba($dark, .3)
+//   .inner-details-button
+//     background-color: $light
+//     border-bottom: 1px solid rgba($dark, .3)
 
-    &.show-details
-      .main-title
-        background-color: $pri
-        color: $light !important
+//     &.show-details
+//       .main-title
+//         background-color: $pri
+//         color: $light !important
 
-        i
-          transform: rotate(-180deg)
+//         i
+//           transform: rotate(-180deg)
 
-      .inner-details
-        grid-template-rows: 1fr
+//       .inner-details
+//         grid-template-rows: 1fr
 
-        .main-container
-          padding: 1rem
-          margin-top: .7rem
+//         .main-container
+//           padding: 1rem
+//           margin-top: .7rem
 
-    .main-title
-      @include flex($justify: space-between)
-      font-size: 1.4rem
-      font-weight: 500
-      padding: 1rem
-      cursor: pointer
-      transition: .4s
+//     .main-title
+//       @include flex($justify: space-between)
+//       font-size: 1.4rem
+//       font-weight: 500
+//       padding: 1rem
+//       cursor: pointer
+//       transition: .4s
 
-      i
-        transition: .4s
-        display: block
+//       i
+//         transition: .4s
+//         display: block
 
-      &:hover
-        color: $pri
+//       &:hover
+//         color: $pri
 
-    .inner-details
-      display: grid
-      grid-template-rows: 0fr
-      transition-property: grid-template-rows
-      transition-timing-function: cubic-bezier(.4,0,.2,1)
-      transition-duration: .4s
+//     .inner-details
+//       display: grid
+//       grid-template-rows: 0fr
+//       transition-property: grid-template-rows
+//       transition-timing-function: cubic-bezier(.4,0,.2,1)
+//       transition-duration: .4s
 
-      .main-container
-        overflow: hidden
-        border: none
-        padding: 0 1rem
-        margin-top: 0
-        transition-duration: .4s
+//       .main-container
+//         overflow: hidden
+//         border: none
+//         padding: 0 1rem
+//         margin-top: 0
+//         transition-duration: .4s
 
 @media only screen and ( max-width:  1300px)
   .wrapper
@@ -80,6 +79,10 @@
 @media only screen and ( max-width:  1200px)
   .wrapper
     max-width: 1100px
+
+  .package-search-area
+    .suggest-list
+      left: 1.5rem
 
 @media only screen and ( max-width:  1100px)
   .wrapper
@@ -96,6 +99,29 @@
   .blog_page
     .list
       grid-template-columns: 1fr 1fr
+
+  .recommended-trekking-gears
+    .gear-list
+      .item
+        flex-direction: column
+        .team-image
+          max-width: 100%
+
+        .details
+          max-width: 100%
+
+          .name
+            font-size: 1.2rem
+
+          ul
+            li
+              font-size: .9rem
+              line-height: 1.5rem
+
+  .TripOverview
+    .main-container
+      .TripOverviewMainContent
+        grid-template-columns: 1fr
 
 @media only screen and ( max-width:  1000px)
   header
@@ -176,10 +202,6 @@
   .HelpfulYetis
     .list
       grid-template-columns: 1fr 1fr 1fr 1fr
-
-      .item
-        &:nth-last-child(1)
-          grid-column-end: span 4
 
   .why-choose-us
     .list
@@ -307,6 +329,44 @@
         width: 8rem
         margin-left: 0
 
+  .About_us
+    .item
+      flex-direction: column
+
+      .content
+        flex: 100%
+
+      .mySwiper
+        flex: 100%
+
+  .HelpfulYetis
+    .list
+      grid-template-columns: 1fr 1fr 1fr
+
+  .MoreInfoSection
+    &.includeExcludes
+      .TripOverviewMainContent
+        @include grid($columns: 1fr)
+
+  .instagram-post
+    .instagram-post-list
+      @include grid($columns: 1fr 1fr)
+
+  .contact-page
+    .contact-page-area
+      grid-template-columns: 1fr 1fr
+
+@media only screen and ( max-width: 900px )
+  header
+    .inner
+      .nav-links
+        display: none
+    .side-nav-btn
+      display: flex
+
+  .side-nav
+    display: block
+
 @media only screen and ( max-width:  800px)
   .wrapper
     max-width: 600px
@@ -321,6 +381,9 @@
       .side-nav-btn
         display: flex
 
+  .side-nav
+    display: block
+
   .banner
     .swiper-slide
       .item
@@ -329,6 +392,7 @@
         .content-area
           h2
             font-size: 2.8rem
+            line-height: 3rem
 
   .AboutSacred
     .item
@@ -363,11 +427,7 @@
 
   .HelpfulYetis
     .list
-      grid-template-columns: 1fr 1fr 1fr
-
-      .item
-        &:nth-last-child(1)
-          grid-column-end: span 2
+      grid-template-columns: 1fr 1fr
 
   .why-choose-us
     .list
@@ -424,6 +484,7 @@
 
   .NavigateButtons
     top: 4rem
+    display: none
     .button-list
       display: none
 
@@ -477,8 +538,12 @@
       border: 0
 
   .MoreInfoSection
-    .inner-details-button
-      border-bottom: none
+    .main-container
+      padding-top: 0 !important
+      margin-top: 0 !important
+
+      .desc
+        margin-top: 1rem
 
   .inner-details-button
     background-color: $light
@@ -548,12 +613,6 @@
         margin-bottom: 1.5rem
         font-weight: 500
 
-      ul
-        li
-          margin-bottom: 1.5rem
-          font-size: 16px
-          font-weight: 300
-
     .with-image
       @include grid($columns: 1fr)
 
@@ -590,7 +649,8 @@
                 position: static
 
   .package-search-area
-    padding: 0
+    .suggest-list
+      left: 0
 
     .package-search
       @include flex($justify: center)
@@ -608,6 +668,88 @@
         width: 100%
         border-radius: 4px
 
+  .VideoBanner
+    .video-image-area
+      .image
+        height: 30rem
+
+      .content
+        .video-title
+          font-size: 2rem
+          line-height: 2.5rem
+
+  .recommended-trekking-gears
+    .gear-list
+      grid-template-columns: 1fr
+
+      .item
+        flex-direction: row
+
+        .team-image
+          max-width: 15rem
+
+        .details
+          max-width: calc( 100% - 15rem )
+
+  .custom-tours
+    .form-inputs
+      margin-top: 1rem
+
+      .input-area.fill-name
+        margin-bottom: .5rem
+
+        .group
+          margin-bottom: 2rem
+
+      .input-group
+        @include grid(1fr)
+        margin-bottom: 1rem
+        grid-gap: .3rem
+
+        .group
+          margin-bottom: 1rem
+
+          &.phone-input
+            margin-bottom: 3rem
+
+  .contact-page
+    .contact-page-area
+      grid-template-columns: 1fr
+
+      .contact-form
+        grid-area: 2
+        margin-top: 2rem
+
+      .contact-details
+        grid-area: 1
+
+@media only screen and ( max-width:  700px)
+  .teams-popup
+    align-items: flex-start
+    .popup-box
+      margin-top: 2rem
+
+      .popup-container
+        flex-direction: column
+        align-items: center
+
+        .details
+          max-width: 100%
+          width: 100%
+          text-align: center
+
+          p
+            font-size: .9rem
+
+@media only screen and ( max-width:  650px)
+  header
+    .header-top
+      .social-icons
+        display: none
+
+      .header-other
+        justify-content: flex-end
+
 @media only screen and ( max-width:  600px)
   .wrapper
     max-width: 500px
@@ -620,6 +762,16 @@
 
     .name
       font-size: 1.7rem
+
+  .banner
+    position: relative
+    .swiper-slide
+      .item
+        .content-area
+          h2
+            font-size: 2.2rem
+            line-height: 2.4rem
+            letter-spacing: normal
 
   .special-package
     .list
@@ -722,7 +874,6 @@
       ul
         li
           margin-bottom: 1rem
-          font-size: .9rem
 
   .TrekkingRegionsWorldwide
     .list
@@ -831,13 +982,66 @@
       font-size: .9rem !important
       font-weight: 300 !important
 
+  .recommended-trekking-gears
+    .gear-list
+      .item
+        flex-direction: column
+        .team-image
+          max-width: 100%
+
+        .details
+          max-width: 100%
+
+          .name
+            font-size: 1.2rem
+
+          ul
+            li
+              font-size: .9rem
+              line-height: 1.5rem
+
+  .HelpfulYetis
+    .list
+      @include grid($columns: 1fr 1fr)
+
+      .item
+        .image-area
+          height: 20rem
+
+  .ItinerarySection
+    .main-container
+      padding: 2rem
+
+      .all-list
+        padding-left: 0
+
+        &::before
+          display: none
+
+        .ItineraryCardComponent
+          .item-title
+            align-items: flex-start
+            justify-content: space-between
+
+            .indicator
+              display: none
+
+  .NewPackageDetails
+    .PackageMainDetails
+      .item-list
+        grid-template-columns: 1fr
+
+  .instagram-post
+    .instagram-post-list
+      @include grid($columns: 1fr)
+
 @media only screen and ( max-width:  550px)
   .enquiry-sec
     &.active
       left: 20px
 
   .contact-popup
-    padding-left: 3rem
+    padding-left: 1rem
 
   .blog-details-page
     padding: 4rem 0
@@ -871,10 +1075,48 @@
         font-size: 20px
         margin-bottom: 10px
 
+  footer
+    .footer-list
+      @include grid($columns: 1fr)
+
+      .item
+        .f-title
+          font-size: 18px
+          margin-bottom: .5rem
+
+        ul
+          li
+            font-size: 12px
+
+            i
+              margin-right: 5px
+
+            a
+              width: 100%
+
+        .desc
+          font-size: 14px
+          line-height: 140%
+
 @media only screen and ( max-width:  500px)
+  header
+    .inner
+      .logo
+        height: 140%
+        width: 100px
+
+  .side-nav
+    left: -390px
+    width: 350px
+
   .banner
     position: relative
-    margin-bottom: 12rem
+    .swiper-slide
+      .item
+        .content-area
+          h2
+            font-size: 2.2rem
+            line-height: 2.4rem
 
     .search-section
       .form-area
@@ -892,42 +1134,375 @@
     .list
       grid-template-columns: 1fr
 
+  .HelpfulYetis
+    .list
+      grid-template-columns: 1fr
+
+  .custom-tours
+    .title-part
+      margin-bottom: 0
+      padding: 1rem
+
+      .name
+        font-size: 1.4rem
+        margin-bottom: 0
+
+    .form-subtitle
+      font-size: 1rem
+
+    .form-inputs
+      margin-top: 1rem
+
+      .input-area.fill-name
+        margin-bottom: .5rem
+
+        .group
+          margin-bottom: 2rem
+
+      .input-group
+        @include grid(1fr)
+        margin-bottom: 1rem
+        grid-gap: .3rem
+
+        .group
+          margin-bottom: 1rem
+
+          &.phone-input
+            @include grid($columns: .5fr .9fr)
+
+  .custom-tours
+    .custom-tours-form-area
+      padding: 1.2rem
+
+    .group
+      label
+        font-size: .8rem
+        max-width: 90%
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
+
 @media only screen and ( max-width:  470px)
+  header
+    .header-top
+      display: none
+
+    .inner
+      height: 4rem
+
+      .logo
+        height: 100%
+        width: 100px
+
+  .title-part
+    margin-bottom: 1rem
+
+    .name
+      margin-bottom: .2rem
+
+  .banner
+    position: relative
+    .swiper-slide
+      .item
+        .content-area
+          h2
+            font-size: 1.7rem
+            line-height: 2rem
+            letter-spacing: normal
+
+  .About_us
+    .item
+      .content
+        h1
+          font-size: 1.2rem
+
+        p
+          font-size: .9rem
+
+      .button-group
+        button
+          font-size: .8rem !important
+
   .title-part
     h5
-      font-size: .9rem
-      margin: .5rem 0
+      font-size: 1rem
+      margin: .2rem 0
 
     .name
       font-weight: 500
-      font-size: 1.2rem
+      font-size: 1.4rem
 
   .HelpfulYetis
     .list
-      @include grid($columns: 1fr 1fr)
-
-      .item
-        &:nth-last-child(1)
-          grid-column-end: span 2
-
-  footer
-    .footer-list
       @include grid($columns: 1fr)
 
       .item
-        .f-title
-          font-size: 18px
+        .image-area
+          height: 20rem
 
-        ul
-          li
-            font-size: 12px
-            i
-              margin-right: 5px
+  .ReasonsToChooseUs
+    .about-content
+      h3
+        font-size: 1.3rem
+        line-height: 1.7rem
+        margin-bottom: .6rem
 
-            a
-              color: $light
-              width: 100%
+      p
+        margin-bottom: 1rem
+        font-size: .8rem
+        line-height: 1.3rem
 
+      ul
+
+        li
+          margin-bottom: .5rem
+
+    .with-image
+      .image
+        height: 200px
+        width: 100%
+
+        img
+          @include image()
+          object-fit: cover
+
+  .PageBanner
+    h1
+      font-size: 2rem
+      line-height: 2.3rem
+
+  .packageCardComponent
+    .image-area
+      height: 13rem
+
+      .time, .country
+        font-size: .8rem
+
+      .country
+        font-size: .8rem
+
+      .booking
+        font-size: .8rem
+
+      .available
+        font-size: .8rem
+
+    .content
+      padding: .6rem
+
+      .name-area
+        @include flex($justify: space-between)
+        margin-bottom: .4rem
+
+      .name
+        font-size: 1rem
+        font-weight: 700
+        margin: 0 0 .6rem
+
+      .prices
+        color: $pri
+        font-size: 1.1rem
+        font-weight: 700
+
+      .mountain-peak
+        border: 1px solid $dark
+        border-left: none
+        border-right: none
+        padding: .7rem 0
+        margin: 1rem 0
+        @include flex($justify: space-between)
+
+        .height, .diff
+          font-size: .9rem
+          font-weight: 500
+          @include flex($justify: flex-start)
+          gap: .5rem
+
+          img
+            height: 1.2rem
+            width: 1.2rem
+            object-fit: contain
+
+        .diff
+          @include flex($justify: flex-end)
+          i
+            margin-left: 6px
+            margin-right: 0
+
+      .desc
+        font-size: 14px
+        line-height: 1.4rem
+        text-align: justify
+        color: rgba($dark, .7)
+        margin-bottom: 1rem
+
+      .card-footer
+        @include flex($justify: space-between)
+        width: 100%
+
+        .book-btn
+          @include customButton($bgcolor: $sec, $color: $light)
+          font-size: .86rem
+          padding: .3rem 1rem
+
+  .ItinerarySection
+    .main-container
+      padding: 2rem
+
+      .all-list
+        .ItineraryCardComponent
+          .item-title
+            align-items: flex-start
+            justify-content: space-between
+
+          .item-body
+            p
+              font-size: .9rem
+
+  .testinomial
+    .item
+      .text-sec
         .desc
-          font-size: 14px
-          line-height: 140%
+          font-size: .9rem
+          line-height: 1.3rem
+
+        .name
+          font-size: 1rem
+
+        .post
+          font-size: .9rem
+
+  .DateAndPriceSection
+    .main-container
+      h3
+        font-size: 1.2rem
+
+      .year-list
+        .item
+          .item-body
+            .date-list
+              .date-item-list
+                @include grid($columns: 1fr )
+                padding-top: .8rem
+                margin-top: .8rem
+                grid-gap: .5rem
+
+                .price-sec, .status-sec
+                  text-align: left
+
+                  span
+                    font-size: .9rem
+
+                .price-sec
+                  span
+                    font-size: 1.1rem
+                    padding: 0
+
+                .button-sec
+                  justify-content: flex-start
+
+  .start-booking
+    padding: 1.5rem
+    background-color: $light
+
+    .title-sec
+      @include flex($justify: space-between)
+      gap: 1.1rem
+      margin-bottom: 1rem
+
+      .form-title
+        font-size: 1.1rem
+        font-weight: 500
+
+        small
+          font-size: .8rem
+
+      .price
+        font-size: 1rem
+        color: $sec
+        font-weight: 500
+        text-align: right
+
+        span
+          color: $sec
+          font-size: .8rem
+
+    .booking-form
+      .form-inputs
+        margin-top: 2rem
+
+        .input-group
+          flex-direction: column
+          margin-bottom: 0
+          gap: 0
+
+          .group
+            width: 100%
+
+        .group
+          margin-bottom: 2rem
+
+          &.textarea
+            height: 8rem
+            padding-top: 1rem
+
+            textarea
+              height: 100%
+              resize: none
+
+      .submit-btn
+        font-size: .9rem
+
+  .TripOverview
+    .main-container
+      margin-top: 0 !important
+
+      .TripOverviewMainContent
+        p
+          font-size: .9rem
+
+  .MoreInfoSection
+    &.includeExcludes
+      .TripOverviewMainContent
+        .IncludesArea, .ExcludeArea
+          h2
+            font-size: 1.1rem
+            margin-bottom: 0
+
+          .desc
+            margin-top: .5rem
+
+  .package-search-area
+    padding: 2rem 0
+
+    .suggest-list
+      top: 6rem
+      left: 0rem
+
+@media only screen and ( max-width:  400px)
+  .side-nav
+    left: -320px
+    width: 280px
+
+    .logo
+      padding: .5rem 0
+
+      img
+        height: 70px
+        width: 170px
+
+    .nav-links
+      padding: 0 .5rem
+
+      .nav-btn
+        padding: .6rem .7rem
+        font-size: .9rem
+
+      .drop-menu
+        .drop-down-area
+          li
+            button
+              font-size: .9rem
+
+  .recaptcha div
+    overflow: auto
