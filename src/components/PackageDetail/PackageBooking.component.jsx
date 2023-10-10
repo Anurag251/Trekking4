@@ -164,9 +164,11 @@ const PackageBookingComponent = ({
           <i className="fas fa-times"></i>
         </div>
 
+        <h5>{selectedData?.title}</h5>
+
         <div className="title-sec">
           <div className="form-title">
-            Start Booking
+            ENQUIRE NOW
             <br />
             <small>Date: {bookingPopupForm.date}</small>
           </div>

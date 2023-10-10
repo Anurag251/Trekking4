@@ -5,3 +5,26 @@ prefered bird watching destinations
 
 prefere travel date
 remove time, budget 
+
+reomve trek
+
+Rotary:
+home banner sep
+replace aug with sep
+card month in descending order
+
+
+
+changes for Prajwol:
+light logo api ma aiyena
+favicon url aako xainea path matra aako xa
+Add image field for tour routes in trip api
+
+Rotary for Prajwol:
+
+
+space in name 
+
+image 100 150
+
+GML TEXT : 150px

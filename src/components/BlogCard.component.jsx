@@ -8,7 +8,7 @@ const BlogCardComponent = ({ data }) => {
     <Link to={`/blog-details/${data.slug}`}>
       <div className="BlogCardComponent" data-aos="fade-down">
         <div className="image-area">
-          <img src={data.image.original_image} alt="" />
+          <img src={data.image.big_image_two} alt="" />
 
           <div className="time">
             <i className="far fa-clock"></i>

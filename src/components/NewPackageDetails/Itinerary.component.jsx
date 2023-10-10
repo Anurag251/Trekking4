@@ -5,7 +5,7 @@ import HtmlToParagraphs from "../HtmlToParagraphs.component";
 import ItineraryCardComponent from "./ItineraryCard.component";
 import { useLocation } from "react-router-dom";
 
-const ItineraryComponent = ({ data }) => {
+const ItineraryComponent = ({ data, short }) => {
   const { detailsPageNav, setDetailsPageNav } = useContext(AllDataContext);
   const [selectedItinerary, setSelectedItinerary] = useState(
     data?.itenarydetails[0]?.trip_title
@@ -36,12 +36,13 @@ const ItineraryComponent = ({ data }) => {
                 setDetailsPageNav("Itinerary");
               }}
             >
-              Itinerary <i className="fas fa-angle-down"></i>
+              {short ? "Itinerary" : "Details Itinerary"}{" "}
+              <i className="fas fa-angle-down"></i>
             </div>
 
             <div className="inner-details">
               <div className="main-container">
-                <div className="all-list">
+                <div className={`all-list ${short ? "short" : ""}`}>
                   {data.itenarydetails.map((itinerary, idx) => (
                     <div
                       key={idx}
@@ -49,7 +50,7 @@ const ItineraryComponent = ({ data }) => {
                         selectedItinerary === itinerary.trip_title
                           ? "active"
                           : ""
-                      }`}
+                      } `}
                     >
                       <div
                         className="item-title"
@@ -66,14 +67,16 @@ const ItineraryComponent = ({ data }) => {
                         </div>
                       </div>
 
-                      <div className="item-body">
-                        <p
-                          className="desc"
-                          dangerouslySetInnerHTML={{
-                            __html: itinerary && itinerary.trip_details,
-                          }}
-                        />
-                      </div>
+                      {short ? null : (
+                        <div className="item-body">
+                          <p
+                            className="desc"
+                            dangerouslySetInnerHTML={{
+                              __html: itinerary && itinerary.trip_details,
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

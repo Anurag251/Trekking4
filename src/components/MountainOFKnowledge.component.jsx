@@ -27,7 +27,7 @@ const MountainOFKnowledgeComponent = ({ title, subTitle, link }) => {
                     >
                       <div className="image-area">
                         <img
-                          src={data?.image?.original_image}
+                          src={data?.image?.big_image_two}
                           alt={data?.category_name}
                         />
                       </div>

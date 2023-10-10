@@ -24,7 +24,7 @@ const BloggingDetailsPage = () => {
   return (
     <div className="BloggingPage BloggingDetailsPage">
       <PageBannerComponent
-        image={`${selectedData && selectedData.image.original_image}`}
+        image={`${selectedData && selectedData.image.big_image_two}`}
       >
         {selectedData && selectedData.title}
       </PageBannerComponent>
@@ -43,7 +43,7 @@ const BloggingDetailsPage = () => {
               <div className="with-image" key={idx}>
                 <div className="image">
                   <img
-                    src={data["text-image-text"]?.image?.original_image}
+                    src={data["text-image-text"]?.image?.big_image_two}
                     alt={data["text-image-text"]?.text}
                   />
                 </div>

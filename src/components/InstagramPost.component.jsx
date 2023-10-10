@@ -11,7 +11,7 @@ const InstagramFeed = () => {
     const fetchInstagramFeed = async () => {
       try {
         const accessToken =
-          "IGQWROdXJLMjhSYlRRZAUVxc2pDYnFzXzZAjNnl0Wld2ZAFMtSzViajhWQm5yOG04YjM3OFk3bXlwWWY5WXlBcEpzYjgySmZABS0FwQ3A4dElqWDBIZAlo2eXd0dlE0ejhVYkxXbDM2cW5MbjVzX2FobDBkRmlzcERnbEUZD"; // Your Instagram Access Token
+          "IGQWRPb2lhaklfcGFkM0tCR2lVYWY4bndtRmthQkRjb1duTTRfVTRFZAkdMTWtiVVdqYVZAPdHFHN19wZAmpmSVB0V3VKR21yM0hpamhIOVVsbEFwMVpSdXFtZAUNFQ2N3SmdYZAW5JcTVwc2kwcUhSMmZADYjNQSXJzYVUZD";
         const endpoint = `https://graph.instagram.com/me/media?fields=id,media_type,media_url,caption,permalink,thumbnail_url,timestamp&access_token=${accessToken}`;
 
         const response = await fetch(endpoint);
@@ -38,14 +38,6 @@ const InstagramFeed = () => {
     return RegExp("\\b" + word + "\\b").test(str);
   }
 
-  useEffect(() => {
-    feedData?.map((data) => {
-      if (findWord("bird", data.caption)) {
-        console.log(data);
-      }
-    });
-  });
-
   return (
     <div className="instagram-post">
       {feedData && (
@@ -71,7 +63,7 @@ const InstagramFeed = () => {
             <div className="wrapper">
               <div className="instagram-post-list">
                 {feedData
-                  .filter((data) => findWord("nepalbirdwatching", data.caption))
+                  .filter((data) => findWord("bird", data.caption))
                   .filter((data, idx) => idx < 9)
                   .map((item) => (
                     <Fragment>

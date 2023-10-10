@@ -24,8 +24,8 @@ const ReasonsToChooseUsPage = () => {
       <PageBannerComponent
         image={
           thisPageData?.page_type === 7
-            ? thisPageData?.contents[0]?.image?.original_image
-            : thisPageData?.image?.original_image
+            ? thisPageData?.contents[0]?.image?.big_image_two
+            : thisPageData?.image?.big_image_two
         }
       >
         {thisPageData?.title}
@@ -57,7 +57,7 @@ const ReasonsToChooseUsPage = () => {
                     {data?.image_id !== null ? (
                       <div className="image" data-aos="fade-down">
                         <img
-                          src={data?.image?.original_image}
+                          src={data?.image?.big_image_two}
                           alt={data?.text}
                         />
                       </div>

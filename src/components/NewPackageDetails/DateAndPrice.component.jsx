@@ -108,8 +108,8 @@ const DateAndPriceComponent = ({ data }) => {
                                       }
                                     >
                                       {priceData.space === 0
-                                        ? "Sold Out"
-                                        : "Book Now"}
+                                        ? "Not Available"
+                                        : "ENQUIRE NOW"}
                                     </button>
                                   </div>
                                 </div>

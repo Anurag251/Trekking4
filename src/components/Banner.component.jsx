@@ -13,6 +13,7 @@ import { AllDataContext } from "../context/AllData.context";
 const BannerComponent = () => {
   const { bannerDatas } = useContext(AllDataContext);
 
+  console.log(bannerDatas);
   return (
     <div className="banner">
       <Swiper
@@ -33,7 +34,7 @@ const BannerComponent = () => {
             <SwiperSlide key={idx}>
               <div className="item">
                 <div className="slider-image">
-                  <img src={data?.image?.original_image} alt={data?.title} />
+                  <img src={data?.image?.big_image_two} alt={data?.title} />
                 </div>
                 <div className="wrapper">
                   <div className="content-area">

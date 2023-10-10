@@ -32,7 +32,7 @@ const MoreInfoComponent = ({ data }) => {
               <div className="main-container">
                 <div className="TripOverviewMainContent">
                   <div className="IncludesArea">
-                    <h2>Includes</h2>
+                    <h2>What's Includes</h2>
 
                     <p
                       className="desc"
@@ -43,7 +43,7 @@ const MoreInfoComponent = ({ data }) => {
                   </div>
 
                   <div className="ExcludeArea">
-                    <h2>Exclude</h2>
+                    <h2>What's Exclude</h2>
 
                     <p
                       className="desc"

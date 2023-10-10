@@ -53,7 +53,7 @@ export const CustomToursPage = () => {
     hotelCategory: "",
     specialRequest: "",
   });
-  const hotelCategories = ["Luxury", "Standard", "First Class", "Budget"];
+  const hotelCategories = ["Luxury", "Standard", "First Class"];
 
   const nationalities = [
     "American",
@@ -352,7 +352,7 @@ export const CustomToursPage = () => {
                       <CustomInputComponent
                         type="number"
                         name="phone"
-                        label="Phone"
+                        label="Phone (optional)"
                         handleChange={handleChange}
                         value={formValues.phone}
                       />
@@ -387,13 +387,19 @@ export const CustomToursPage = () => {
                         select
                       >
                         <option value=""></option>
-                        <option value="Tours">Tours</option>
-                        <option value="Treks">Treks</option>
-                        <option value="Birding Tour">Birding Tour</option>
+                        <option value="Bird watching tour">
+                          Bird watching tour
+                        </option>
+                        <option value="Bird watching trek">
+                          Bird watching trek
+                        </option>
+                        <option value="Himalayan adventure birding tour">
+                          Himalayan adventure birding tour
+                        </option>
                         <option value="other">Other</option>
                       </CustomInputComponent>
 
-                      {/* {formValues.tourType === "other" ? (
+                      {formValues.tourType === "other" ? (
                         <CustomInputComponent
                           type="text"
                           name="other"
@@ -401,12 +407,12 @@ export const CustomToursPage = () => {
                           handleChange={handleChange}
                           value={formValues.other}
                         />
-                      ) : null} */}
+                      ) : null}
 
                       <CustomInputComponent
                         type="text"
                         name="preferredTrip"
-                        label="Preferred trip e.g. Everest Base Camp Trek"
+                        label="Prefered bird watching destinations(Optional)"
                         handleChange={handleChange}
                         value={formValues.preferredTrip}
                       />
@@ -414,18 +420,9 @@ export const CustomToursPage = () => {
                       <CustomInputComponent
                         type="date"
                         name="arrivalDate"
-                        label="Arrival Date"
+                        label="Prefere travel date"
                         handleChange={handleChange}
                         value={formValues.arrivalDate}
-                        active
-                      />
-
-                      <CustomInputComponent
-                        type="time"
-                        name="arrivalTime"
-                        label="Arrival Time"
-                        handleChange={handleChange}
-                        value={formValues.arrivalTime}
                         active
                       />
 

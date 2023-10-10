@@ -16,7 +16,7 @@ const AboutSacredComponent = () => {
             .map((data, idx) => (
               <div className="item" key={idx}>
                 <div className="images-area" data-aos="fade-down">
-                  <img src={data?.image?.original_image} alt={data.title} />
+                  <img src={data?.image?.big_image_two} alt={data.title} />
                 </div>
 
                 <div className="content" data-aos="fade-down">

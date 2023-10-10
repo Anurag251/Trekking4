@@ -7,7 +7,7 @@ const NewPackageCardComponent = ({ data }) => {
       <div className="packageCardComponent" data-aos="fade-down">
         <div className="image-area">
           <div className="image">
-            <img src={data.image?.original_image} alt={data.title} />
+            <img src={data.image?.big_image_two} alt={data.title} />
           </div>
           {data.recommended === 1 ? (
             <div className="booking">Booking Open</div>

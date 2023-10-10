@@ -123,6 +123,17 @@
       .TripOverviewMainContent
         grid-template-columns: 1fr
 
+  .NavigateButtons
+    .button-list
+      .navigateBtn
+        font-size: .9rem
+        padding: 0 .7rem
+
+    .last-button
+      .bookNowNutton
+        font-size: .9rem
+        padding: .6rem
+
 @media only screen and ( max-width:  1000px)
   header
     .inner
@@ -356,6 +367,21 @@
     .contact-page-area
       grid-template-columns: 1fr 1fr
 
+  .TripOverview
+    .inner-TripOverview
+      @include grid($columns: 1fr)
+
+  .NavigateButtons
+    .button-list
+      .navigateBtn
+        font-size: .8rem
+        padding: 0 .5rem
+
+    .last-button
+      .bookNowNutton
+        font-size: .7rem
+        padding: .6rem
+
 @media only screen and ( max-width: 900px )
   header
     .inner
@@ -527,7 +553,7 @@
                 .button-sec
                   justify-content: flex-start
 
-  .TripOverview, .ItinerarySection, .DateAndPriceSection, .MoreInfoSection
+  .TripOverview, .ItinerarySection, .DateAndPriceSection, .MoreInfoSection, .GallerySection
     opacity: 1 !important
     height: 100% !important
     pointer-events: auto
@@ -1175,12 +1201,15 @@
       padding: 1.2rem
 
     .group
+      .custom-input
+        &:focus ~ label
+          font-size: .6rem
+
       label
         font-size: .8rem
-        max-width: 90%
-        overflow: hidden
-        text-overflow: ellipsis
-        white-space: nowrap
+
+        &.active, &.autoActive
+          font-size: .6rem
 
 @media only screen and ( max-width:  470px)
   header
@@ -1442,13 +1471,13 @@
         .group
           margin-bottom: 2rem
 
-          &.textarea
-            height: 8rem
-            padding-top: 1rem
+          // &.textarea
+          //   height: 8rem
+          //   padding-top: 1rem
 
-            textarea
-              height: 100%
-              resize: none
+          //   textarea
+          //     height: 100%
+          //     resize: none
 
       .submit-btn
         font-size: .9rem

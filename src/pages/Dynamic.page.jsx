@@ -25,7 +25,7 @@ const DynamicPage = () => {
       <PageBannerComponent
         image={
           selectedData?.image !== null
-            ? selectedData?.image?.original_image
+            ? selectedData?.image?.big_image_two
             : image
         }
       >

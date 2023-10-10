@@ -230,6 +230,8 @@ const TripExtensionsComponent = ({ data }) => {
 
   const { detailsPageNav, setDetailsPageNav } = useContext(AllDataContext);
 
+  console.log(data);
+
   return (
     <div
       className={`MoreInfoSection ${

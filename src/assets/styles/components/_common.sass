@@ -693,6 +693,7 @@
 
 .NewPackageDetails
   background-color: $light
+  margin-bottom: 2rem
 
   .PackageMainDetails
     .item-list
@@ -783,6 +784,17 @@
     opacity: 1
     height: 100%
 
+  .inner-TripOverview
+    @include grid($columns: 1fr 1fr)
+    grid-gap: 2rem
+
+    .short-itinerary
+      .main-title
+        background: none !important
+        color: $dark !important
+        padding: 0 1rem !important
+        font-weight: 600 !important
+
   .main-title
     font-size: 1.6rem
     text-align: left
@@ -791,6 +803,29 @@
 
     i
       display: none
+
+  .short-itinerary
+    .inner-details
+      .all-list
+        .ItineraryCardComponent
+          margin-bottom: 1rem
+
+        .item-title
+          .name
+            @include flex($justify: flex-start)
+            gap: .5rem
+
+            span
+              flex: calc( 100% - 2rem )
+              max-width: calc( 100% - 2rem )
+
+            .indicator
+              height: 2rem
+              width: 2rem
+              border-radius: 50%
+              @include flex($justify: center)
+              text-align: center
+              background-color: $pri
 
   .main-container
     margin-top: 1rem
@@ -892,6 +927,15 @@
     .all-list
       padding-left: 2rem
       position: relative
+
+      &.short
+        &::before
+          display: none
+
+        .ItineraryCardComponent
+          .item-title
+            .arrow
+              display: none
 
       &::before
         content: ''
@@ -1518,14 +1562,72 @@
               margin-bottom: 0
 
 .GallerySection
-  background-color: #F2F2F2
+  background-color: $light
+  opacity: 0
+  height: 0
+  overflow: hidden
+  transition: .2s
+  pointer-events: none
 
-  .gallery-area
-    margin-top: 2rem
+  &.active
+    overflow: visible
+    pointer-events: auto
+    opacity: 1
+    height: 100%
 
-    img
-      @include image()
-      height: 400px
+  .main-title
+    font-size: 1.6rem
+    text-align: left
+    font-weight: 600
+    text-transform: capitalize
+
+    i
+      display: none
+
+  .main-container
+    margin-top: 1rem
+
+    h2
+      font-size: 1.4rem
+      font-weight: 600
+      margin-bottom: .6rem
+      margin-top: 1.5rem
+
+    ul
+      padding-left: 1.5rem
+
+      li
+        margin-bottom: .5rem
+        list-style: disc
+        list-style-type: circle
+
+  .gallery-list
+    margin: 0
+    padding: 0
+    width: 100%
+    display: grid
+    grid-template-columns: repeat(auto-fill, 220px)
+    grid-auto-rows: 10px
+    grid-gap: 10px
+    justify-content: center
+
+    .item
+      position: relative
+      padding: 0
+      margin: 15px 10px
+      height: 100%
+      width: 100%
+      object-fit: cover
+      grid-row-end: span 16
+      cursor: pointer
+      border-radius: 1rem
+      overflow: hidden
+
+      &:nth-child(even)
+        grid-row-end: span 12
+
+      img
+        @include image()
 
 .SearchComponent
   background-color: $light
@@ -3642,6 +3744,10 @@
       text-transform: uppercase
       font-size: .9rem
       letter-spacing: 1px
+      max-width: 90%
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
 
       &::after
         content: ''
@@ -3721,7 +3827,7 @@
 .instagram-post
   .instagram-post-list
     @include grid($columns: 1fr 1fr 1fr)
-    grid-gap: 0
+    grid-gap: .4rem
 
     .insta-item
       height: 20rem
